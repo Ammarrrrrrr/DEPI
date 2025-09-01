@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_system/HomeScreen.dart';
-import 'package:pharmacy_system/SubScreen.dart';
+import 'package:pharmacy_system/screens/HomeScreen.dart';
+import 'package:pharmacy_system/screens/SubScreen.dart';
 
 
 void main() {
