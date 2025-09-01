@@ -14,7 +14,7 @@
 
 ### Stateless Screen (`stless`)
 ```dart
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class $CLASS_NAME$ extends StatelessWidget {
   const $CLASS_NAME$({super.key});
@@ -22,9 +22,9 @@ class $CLASS_NAME$ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('$CLASS_NAME$')),
+      appBar: AppBar(title: const Text("$CLASS_NAME$")),
       body: const Center(
-        child: Text('$CLASS_NAME$ Screen'),
+        child: Text("$CLASS_NAME$ Screen"),
       ),
     );
   }
@@ -33,7 +33,7 @@ class $CLASS_NAME$ extends StatelessWidget {
 
 ### Stateful Screen (`stfull`)
 ```dart
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class $CLASS_NAME$ extends StatefulWidget {
   const $CLASS_NAME$({super.key});
@@ -48,16 +48,16 @@ class _$CLASS_NAME$State extends State<$CLASS_NAME$> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('$CLASS_NAME$')),
+      appBar: AppBar(title: const Text("$CLASS_NAME$")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Counter: $counter'),
+            Text("Counter: $counter"),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => setState(() => counter++),
-              child: const Text('Increase'),
+              child: const Text("Increase"),
             ),
           ],
         ),
