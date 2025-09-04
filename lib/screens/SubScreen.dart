@@ -6,12 +6,10 @@ class SubScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SubScreen'),
-      ),
       body: Center(
         child: Column(
           children: [
+            SizedBox(height: 200,),
             const Text('SubScreen Screen'),
             ElevatedButton(
               onPressed: () {

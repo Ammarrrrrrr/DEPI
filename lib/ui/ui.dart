@@ -28,9 +28,9 @@ class Coloring {
   final n950 = Color(0xff323135);
 
   //Alert Colors
-  final r400 =Color(0xffff6979);
-  final r500 =Color(0xfffe354e);
-  final r600 =Color(0xffde1135);
+  final r400 = Color(0xffff6979);
+  final r500 = Color(0xfffe354e);
+  final r600 = Color(0xffde1135);
 
   final g500 = Color(0xff18cf6d);
   final g600 = Color(0xff0dac57);
@@ -39,140 +39,167 @@ class Coloring {
   final y200 = Color(0xfffae38d);
   final y300 = Color(0xfff8cf51);
   final y400 = Color(0xfff6bc2f);
-
 }
 
-class Fonts{
+class Fonts {
+  final Coloring _colors;
+
+  Fonts({Coloring? colors}) : _colors = colors ?? Coloring();
+
   // Headings
-  static const TextStyle heading1 = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700, // Bold
-  fontSize: 48,
+  TextStyle heading1({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 48,
+    color: color,
   );
 
-  static const TextStyle heading2 = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 40,
+  TextStyle heading2({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 40,
+    color: color,
   );
 
-  static const TextStyle heading3 = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 32,
+  TextStyle heading3({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 32,
+    color: color,
   );
 
-  static const TextStyle heading4 = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 24,
+  TextStyle heading4({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
+    color: color,
   );
 
-  static const TextStyle heading5 = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 20,
+  TextStyle heading5({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 20,
+    color: color,
   );
 
-  static const TextStyle heading6 = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 18,
+  TextStyle heading6({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
+    color: color,
   );
 
   // Body XL
-  static const TextStyle bodyXLargeBold = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 18,
+  TextStyle bodyXLargeBold({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
+    color: color,
   );
 
-  static const TextStyle bodyXLargeMedium = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w500,
-  fontSize: 18,
+  TextStyle bodyXLargeMedium({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+    color: color,
   );
 
-  static const TextStyle bodyXLargeRegular = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w400,
-  fontSize: 18,
+  TextStyle bodyXLargeRegular({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
+    color: color,
   );
 
   // Body Large
-  static const TextStyle bodyLargeBold = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 16,
+  TextStyle bodyLargeBold({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+    color: color,
   );
 
-  static const TextStyle bodyLargeMedium = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w500,
-  fontSize: 16,
+  TextStyle bodyLargeMedium({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    color: color,
   );
 
-  static const TextStyle bodyLargeRegular = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w400,
-  fontSize: 16,
+  TextStyle bodyLargeRegular({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+    color: color,
   );
 
   // Body Medium
-  static const TextStyle bodyMediumBold = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 14,
+  TextStyle bodyMediumBold({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+    color: color,
   );
 
-  static const TextStyle bodyMediumMedium = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w500,
-  fontSize: 14,
+  TextStyle bodyMediumMedium({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w500,
+    fontSize: 14,
+    color: color,
   );
 
-  static const TextStyle bodyMediumRegular = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w400,
-  fontSize: 14,
+  TextStyle bodyMediumRegular({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: color,
   );
 
   // Body Small
-  static const TextStyle bodySmallBold = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 12,
+  TextStyle bodySmallBold({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
+    color: color,
   );
 
-  static const TextStyle bodySmallMedium = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w500,
-  fontSize: 12,
+  TextStyle bodySmallMedium({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+    color: color,
   );
 
-  static const TextStyle bodySmallRegular = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w400,
-  fontSize: 12,
+  TextStyle bodySmallRegular({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    color: color,
   );
 
   // Body XSmall
-  static const TextStyle bodyXSmallBold = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w700,
-  fontSize: 10,
+  TextStyle bodyXSmallBold({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w700,
+    fontSize: 10,
+    color: color,
   );
 
-  static const TextStyle bodyXSmallMedium = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w500,
-  fontSize: 10,
+  TextStyle bodyXSmallMedium({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+    color: color,
   );
 
-  static const TextStyle bodyXSmallRegular = TextStyle(
-  fontFamily: 'Satoshi',
-  fontWeight: FontWeight.w400,
-  fontSize: 10,
+  TextStyle bodyXSmallRegular({Color? color}) => TextStyle(
+    fontFamily: 'Satoshi',
+    fontWeight: FontWeight.w400,
+    fontSize: 10,
+    color: color,
   );
+}
 
+class Images{
+  final onBoarding1 = "lib/assets/images/Onboarding1.png";
 }
