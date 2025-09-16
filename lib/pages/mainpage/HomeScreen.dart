@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_system/ui/ui.dart';
+import 'package:pharmacy_system/const/ui.dart';
+import 'package:pharmacy_system/const/colors.dart';
+import 'package:pharmacy_system/const/images.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
