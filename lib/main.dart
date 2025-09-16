@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/pages/mainpage/HomeScreen.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/SubScreen.dart';
-
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,12 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const Homescreen(),
-          '/SubScreen': (context) => const SubScreen(),
-        },
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Homescreen(),
+        '/SubScreen': (context) => const SubScreen(),
+      },
     );
-
   }
 }
