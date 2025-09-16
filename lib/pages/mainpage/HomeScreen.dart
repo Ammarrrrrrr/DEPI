@@ -55,7 +55,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
                 child: Text(
-                  "Get Started",
+                  "Get Started1",
                   style: TextStyle(color: Color(0xffffffff)),
                 ),
               ),
