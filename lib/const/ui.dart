@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class Fonts {
+  // ignore: unused_field
   final Coloring _colors;
 
   Fonts({Coloring? colors}) : _colors = colors ?? Coloring();
