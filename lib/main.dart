@@ -11,6 +11,12 @@ import 'package:pharmacy_system/pages/cart/cart.dart';
 import 'package:pharmacy_system/pages/onBoarding/HomeScreen.dart' hide Homescreen;
 import 'package:pharmacy_system/globalElements/bottomBar.dart';
 import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
+import 'package:pharmacy_system/pages/account/account.dart';
+// import 'package:pharmacy_system/pages/mainpage/HomeScreen.dart';
+// import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
+import 'package:pharmacy_system/pages/profile/profile.dart';
+import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
+import 'package:pharmacy_system/pages/saved-items/saved_items.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/SubScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:pharmacy_system/pages/cart/model/cartModel.dart';
@@ -20,6 +26,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => HomeNotifier()),
     ChangeNotifierProvider(create: (context) => PagenavigatorNotifier()),
     ChangeNotifierProvider(create: (context) => Notyficationprovider()),
+    ChangeNotifierProvider(create: (context) => SavedItemsProvider()),
   ], child:  MyApp()));
 }
 

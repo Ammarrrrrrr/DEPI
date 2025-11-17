@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/controller/pagenavigaterprovider.dart';
+import 'package:pharmacy_system/pages/account/account.dart';
 import 'package:pharmacy_system/pages/cart/cart.dart';
 import 'package:pharmacy_system/pages/mainpage/homeui.dart';
+import 'package:pharmacy_system/pages/profile/profile.dart';
+import 'package:pharmacy_system/pages/saved-items/saved_items.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/HomeScreen.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/SubScreen.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +18,12 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pro = Provider.of<PagenavigatorNotifier>(context);
-    const List<Widget> _widgetOptions = <Widget>[
+    List<Widget> _widgetOptions = <Widget>[
       Home(),
+      SavedItems(),
       Cart(cartItems: []),
+      Account(),
+
       
     ];
     return Scaffold(
