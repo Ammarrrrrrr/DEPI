@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/const/ui.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/const/images.dart';
@@ -45,10 +44,7 @@ class _HomescreenState extends State<Homescreen> {
               height: 55,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MainPage()),
-                    );
+                  Navigator.pushNamed(context, "/SubScreen");
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(Coloring().p700),

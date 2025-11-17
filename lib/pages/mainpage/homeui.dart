@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/const/ui.dart';
-import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
+import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
+// import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/mainpage/notifycationui.dart';
 import 'package:provider/provider.dart';
 
