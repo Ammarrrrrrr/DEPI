@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pharmacy_system/pages/admin/controller/admin_provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:team_project/admin/controller/admin_provider.dart';
+// import 'package:team_project/admin/controller/admin_provider.dart';
 
 class AdminUi extends StatelessWidget {
   AdminUi({super.key});
