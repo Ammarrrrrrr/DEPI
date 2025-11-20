@@ -8,7 +8,8 @@ import 'package:pharmacy_system/pages/mainpage/homeui.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/HomeScreen.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/cart/cart.dart';
-import 'package:pharmacy_system/pages/onBoarding/HomeScreen.dart' hide Homescreen;
+import 'package:pharmacy_system/pages/onBoarding/HomeScreen.dart'
+    hide Homescreen;
 import 'package:pharmacy_system/globalElements/bottomBar.dart';
 import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/account/account.dart';
@@ -22,12 +23,17 @@ import 'package:provider/provider.dart';
 import 'package:pharmacy_system/pages/cart/model/cartModel.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => HomeNotifier()),
-    ChangeNotifierProvider(create: (context) => PagenavigatorNotifier()),
-    ChangeNotifierProvider(create: (context) => Notyficationprovider()),
-    ChangeNotifierProvider(create: (context) => SavedItemsProvider()),
-  ], child:  MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => HomeNotifier()),
+        ChangeNotifierProvider(create: (context) => PagenavigatorNotifier()),
+        ChangeNotifierProvider(create: (context) => Notyficationprovider()),
+        ChangeNotifierProvider(create: (context) => SavedItemsProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -87,24 +93,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor:  Coloring().p100,
-        scaffoldBackgroundColor:  Coloring().p0,
-        textTheme: TextTheme(bodyMedium: TextStyle(color:  Coloring().
-        p900)),
+        primaryColor: Coloring().p100,
+        scaffoldBackgroundColor: Coloring().p0,
+        textTheme: TextTheme(bodyMedium: TextStyle(color: Coloring().p900)),
         colorScheme: ColorScheme.light(
-          primary:  Coloring().
-          p900,
-          background:  Coloring().p100,
+          primary: Coloring().p900,
+          background: Coloring().p100,
         ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor:  Coloring().p100,
-        scaffoldBackgroundColor:  Coloring().p950,
-        textTheme: TextTheme(bodyMedium: TextStyle(color:  Coloring().p0)),
+        primaryColor: Coloring().p100,
+        scaffoldBackgroundColor: Coloring().p950,
+        textTheme: TextTheme(bodyMedium: TextStyle(color: Coloring().p0)),
         colorScheme: ColorScheme.dark(
-          primary:  Coloring().p0,
-          background:  Coloring().p100,
+          primary: Coloring().p0,
+          background: Coloring().p100,
         ),
       ),
       debugShowCheckedModeBanner: false,
