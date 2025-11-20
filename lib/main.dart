@@ -3,6 +3,7 @@ import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/controller/pagenavigaterprovider.dart';
 import 'package:pharmacy_system/globalElements/controller/notyficationprovider.dart';
+import 'package:pharmacy_system/pages/auth/views/splash_screen.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/notyficationprovider.dart';
 import 'package:pharmacy_system/pages/mainpage/homeui.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/HomeScreen.dart';
@@ -118,7 +119,8 @@ class MyApp extends StatelessWidget {
       //   '/': (context) => const Homescreen(),
       //   '/SubScreen': (context) => const SubScreen(),
       // },
-      home: const Homescreen(),
+      // home: const Homescreen(),
+      home: const SplashScreen(),
     );
   }
 }

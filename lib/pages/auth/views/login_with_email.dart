@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy_system/MainPage.dart';
+import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
 
@@ -52,7 +54,7 @@ class LoginWithEmail extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 50),
-                AppBotton(text: "Login", GoToPage: () {}),
+                AppBotton(text: "Login", GoToPage: () {context.push(MainPage());}),
                 //SizedBox(height: 50),
               ],
             ),
