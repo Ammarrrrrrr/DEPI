@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Coloring {
+  final p0 = Color(0xFFFFFFFF);
   //Primary Colors
   final p50 = Color(0xffebefff);
   final p100 = Color(0xffdae2ff);
