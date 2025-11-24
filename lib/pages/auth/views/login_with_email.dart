@@ -5,7 +5,9 @@ import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
 
 class LoginWithEmail extends StatelessWidget {
-  const LoginWithEmail({super.key});
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  LoginWithEmail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,14 @@ class LoginWithEmail extends StatelessWidget {
                 ),
                 SizedBox(height: 50),
                 AppField(
+                  controller: emailController,
                   title: "Email",
                   hint: "Enter your email",
                   isPass: false,
                 ),
                 SizedBox(height: 15),
                 AppField(
+                  controller: passwordController,
                   title: "Password",
                   hint: "Enter your password",
                   isPass: true,

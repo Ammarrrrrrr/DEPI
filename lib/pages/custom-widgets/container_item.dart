@@ -34,7 +34,8 @@ class ContainerItem extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image(image: AssetImage(product.imagePath)),
+              // Image(image: AssetImage(product.imagePath)),
+              Image(image: NetworkImage(product.imagePath)),
               Positioned(
                 top: 10,
                 right: 10,
@@ -46,12 +47,13 @@ class ContainerItem extends StatelessWidget {
           Row(
             spacing: 5,
             children: [
+              // Text(
+              //   "${product.description}".toString(),
+              //   style: TextStyle(fontSize: 15),
+              // ), 
+              
               Text(
-                "\$${product.currentPrice}".toString(),
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                "\$${product.oldPrice}",
+                "\$${product.price}",
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 18,
@@ -60,14 +62,14 @@ class ContainerItem extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            spacing: 5,
-            children: [
-              Icon(Icons.stars, color: Color(0xffF6BC2F)),
-              Text({product.rating}.toString()),
-              Text("(${product.ratingCount})"),
-            ],
-          ),
+          // Row(
+          //   spacing: 5,
+          //   children: [
+          //     Icon(Icons.stars, color: Color(0xffF6BC2F)),
+          //     Text({product.rating}.toString()),
+          //     Text("(${product.ratingCount})"),
+          //   ],
+          // ),
         ],
       ),
     );

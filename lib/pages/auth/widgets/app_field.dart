@@ -5,11 +5,13 @@ class AppField extends StatefulWidget {
     super.key,
     required this.title,
     required this.hint,
-    required this.isPass,
+    required this.isPass, 
+    required this.controller,
   });
   final String title;
   final String hint;
   final bool isPass;
+  final TextEditingController controller;
   @override
   State<AppField> createState() => _AppFieldState();
 }
@@ -35,6 +37,7 @@ class _AppFieldState extends State<AppField> {
             height: 55,
             width: 340,
             child: TextFormField(
+              controller: widget.controller,
               obscureText: widget.isPass ? isVisible : false,
               decoration: InputDecoration(
                 hint: Text(

@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pharmacy_system/MainPage.dart';
+import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
+import 'package:pharmacy_system/services/auth.dart';
 
 class SignupWithEmail extends StatefulWidget {
   @override
@@ -10,6 +15,12 @@ class SignupWithEmail extends StatefulWidget {
 
 class _SignupWithEmailState extends State<SignupWithEmail> {
   bool activeRec = false;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmController = TextEditingController();
+  final AuthService _authService = AuthService();
+  bool isVisible = false;
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,18 +44,21 @@ class _SignupWithEmailState extends State<SignupWithEmail> {
                 ),
                 SizedBox(height: 50),
                 AppField(
+                  controller: emailController,
                   title: "Email",
                   hint: "Enter your email",
                   isPass: false,
                 ),
                 SizedBox(height: 15),
                 AppField(
+                  controller: passwordController,
                   title: "Password",
                   hint: "Enter your password",
                   isPass: true,
                 ),
                 SizedBox(height: 15),
                 AppField(
+                  controller: confirmController,
                   title: "Confirm Password",
                   hint: "Enter your password",
                   isPass: true,
@@ -97,7 +111,14 @@ class _SignupWithEmailState extends State<SignupWithEmail> {
                   ),
                 ),
                 SizedBox(height: 50),
-                AppBotton(text: "Signup", GoToPage: () {}),
+                AppBotton(text: "Signup", GoToPage: () {
+                  log("email: ${emailController.text}");
+                  _authService.registerEmailPass(emailController.text, passwordController.text);
+                  context.push(MainPage());
+                }),
+                // AppBotton(text: "Login", GoToPage: () {context.push(MainPage()); 
+                // _authService.signInAnon();
+                // }),
               ],
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:pharmacy_system/const/ui.dart';
 import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/mainpage/notifycationui.dart';
+import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
@@ -12,6 +13,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pro = Provider.of<HomeNotifier>(context);
+    final store = Provider.of<StoreService>(context);
     return Scaffold(
       body: SingleChildScrollView(
         // physics: AlwaysScrollableScrollPhysics(),
@@ -226,7 +228,8 @@ class Home extends StatelessWidget {
             ),
 
             Text('Hot Deals', style: Fonts().heading5(color: Coloring().n950)),
-
+            store.productList.isEmpty? 
+            Text("no products"):
             SizedBox(
               //height: double.infinity,
               //width: double.infinity,
