@@ -3,6 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/views/home_screen.dart';
+import 'package:pharmacy_system/pages/wrapper.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -10,7 +11,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 8), () {
-      context.push(HomeScreen());
+      context.push(Wrapper());
     });
     return Scaffold(
       backgroundColor: Color(0xff452CE8),
