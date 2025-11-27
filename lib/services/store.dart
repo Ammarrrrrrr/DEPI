@@ -71,6 +71,7 @@ class StoreService extends ChangeNotifier {
         .catchError((error) {
           log("Failed to save Product data to firestore: $error");
         });
+    log(docName);
   }
 
   Future<void> getProducts() async {

@@ -28,7 +28,7 @@ class SavedItemsProvider extends ChangeNotifier {
       .map((line) => line.split(','))
       .toList();
       log(rows[1].toString());
-  for (var i = 1; i < 10; i++) {
+  for (var i = 1; i < 40; i++) {
       String url = rows[i][4]+rows[i][5]+rows[i][6]+rows[i][7]+rows[i][7]+rows[i][8]+rows[i][9]+rows[i][10]+rows[i][11];
       // log(url.substring(1,url.length));
 
