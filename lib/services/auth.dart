@@ -12,6 +12,7 @@ class AuthService {
   }
   // auth  change user stream
   Stream<Customer?> get user {
+    log("current user from the stream: $user");
     return _auth.authStateChanges()
     .map(_userFromFirebase);
   }
@@ -61,12 +62,12 @@ class AuthService {
   }
 
   // sign register with email & password
-  Future<UserCredential?> registerEmailPass(String email, String password) async {
+  Future<Customer?> registerEmailPass(String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       log("registered and returned UserCredential");
-      return credential;
+      return _userFromFirebase(credential.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         log('The password provided is too weak.');

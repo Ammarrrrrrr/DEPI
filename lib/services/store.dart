@@ -9,6 +9,7 @@ class StoreService extends ChangeNotifier {
   CollectionReference customerCollection = FirebaseFirestore.instance.collection("customers");
   CollectionReference productCollection = FirebaseFirestore.instance.collection("products");
   List<Product> productList = [];
+  Customer currentUser = Customer(uid: "uid", name: "name", email: "email", saved: [], cart: []);
 
   Future<void> saveUpdateCustomer(Customer myCustomer) async {
     // remove @gmail.com from email
@@ -39,12 +40,13 @@ class StoreService extends ChangeNotifier {
     if (snapshot.docs.isNotEmpty) {
 
       log("got customer data: ${snapshot.docs[0]["name"]}");
-      return Customer(
+      currentUser = Customer(
         uid: snapshot.docs[0]["uid"], 
         name: snapshot.docs[0]["name"], 
         email: snapshot.docs[0]["email"], 
         saved: snapshot.docs[0]["saved"], 
         cart: snapshot.docs[0]["cart"]);
+      return currentUser;
     }
     return null;
   }
@@ -56,7 +58,7 @@ class StoreService extends ChangeNotifier {
 
   // products 
   Future<void> saveUpdateProduct(Product product) async {
-    String docName = product.productId+(product.title.split(' ')[0]);
+    String docName = product.productId+" "+(product.title.split(' ')[0]);
     productCollection
         .doc(docName).set({
           "productId": product.productId,
@@ -89,7 +91,6 @@ class StoreService extends ChangeNotifier {
             price: snapshot.docs[i]["price"], 
             description: snapshot.docs[i]["description"]));
         }
-
     }
   }
 

@@ -7,6 +7,7 @@ import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
 import 'package:pharmacy_system/services/auth.dart';
+import 'package:pharmacy_system/services/store.dart';
 
 class SignupWithEmail extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _SignupWithEmailState extends State<SignupWithEmail> {
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
   final AuthService _authService = AuthService();
+  final StoreService _storeService = StoreService();
   bool isVisible = false;
 
 
@@ -111,10 +113,52 @@ class _SignupWithEmailState extends State<SignupWithEmail> {
                   ),
                 ),
                 SizedBox(height: 50),
-                AppBotton(text: "Signup", GoToPage: () {
-                  log("email: ${emailController.text}");
-                  _authService.registerEmailPass(emailController.text, passwordController.text);
-                  context.push(MainPage());
+                AppBotton(text: "Signup", GoToPage: () async{
+                  final email = emailController.text.trim();
+                  final password = passwordController.text;
+                  final confirm = confirmController.text;
+
+                  if (email.isEmpty || password.isEmpty || confirm.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please fill all fields')),
+                    );
+                    return;
+                  }
+
+                  final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+                  if (!emailRegex.hasMatch(email)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please enter a valid email address')),
+                    );
+                    return;
+                  }
+
+                  if (password != confirm) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Passwords do not match')),
+                    );
+                    return;
+                  }
+
+                  try {
+                    final user = await _authService.registerEmailPass(email, password);
+                    if(user == null){
+                      log('Signup fail from firebase');
+                    }
+                    else{
+                      _storeService.saveUpdateCustomer(user);
+                      // context.push(MainPage());
+                      log("user singup successfully ${user.uid}");
+                    }
+                  } catch (e) {
+                    log('Signup error: $e');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Signup failed. Please try again.')),
+                    );
+                  }
+                  // log("email: ${emailController.text}");
+                  // _authService.registerEmailPass(emailController.text, passwordController.text);
+                  // context.push(MainPage());
                 }),
                 // AppBotton(text: "Login", GoToPage: () {context.push(MainPage()); 
                 // _authService.signInAnon();

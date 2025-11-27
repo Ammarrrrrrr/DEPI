@@ -20,26 +20,27 @@ class SavedItemsProvider extends ChangeNotifier {
     _products.remove(product);
     notifyListeners();
   }
+
   Future<void> addProductsManually() async{
-    final rawData = await rootBundle.loadString('assets/Medicine_Details.csv');
+  //   final rawData = await rootBundle.loadString('assets/Medicine_Details.csv');
 
-  List<List<String>> rows = rawData
-      .split('\n')
-      .map((line) => line.split(','))
-      .toList();
-      log(rows[1].toString());
-  for (var i = 1; i < 40; i++) {
-      String url = rows[i][4]+rows[i][5]+rows[i][6]+rows[i][7]+rows[i][7]+rows[i][8]+rows[i][9]+rows[i][10]+rows[i][11];
-      // log(url.substring(1,url.length));
+  // List<List<String>> rows = rawData
+  //     .split('\n')
+  //     .map((line) => line.split(','))
+  //     .toList();
+  //     log(rows[1].toString());
+  // for (var i = 1; i < 41; i++) {
+  //     String url = rows[i][4]+rows[i][5]+rows[i][6]+rows[i][7]+rows[i][7]+rows[i][8]+rows[i][9]+rows[i][10]+rows[i][11];
+  //     // log(url.substring(1,url.length));
 
-    _products.add(Product(productId: i.toString(), 
-                imagePath: url.substring(1,url.length-1), 
-                title: rows[i].elementAt(0), 
-                price: Random().nextInt(200), 
-                description: "uses: ${rows[i].elementAt(2)}, side effects: ${rows[i].elementAt(3)}"));
-  }
+  //   _products.add(Product(productId: i.toString(), //"hhhhh"
+  //               imagePath: url.substring(1,url.length-1), 
+  //               title: rows[i].elementAt(0), 
+  //               price: Random().nextInt(200), 
+  //               description: "uses: ${rows[i].elementAt(2)}, side effects: ${rows[i].elementAt(3)}"));
+  // }
   for (var i = 0; i < _products.length; i++) {
-    storeService.saveUpdateProduct(products[i]);
+    storeService.deleteProduct(_products[i].productId+(_products[i].title.split(' ')[0]));
   }
 
   //   _products.add(
@@ -74,6 +75,10 @@ class SavedItemsProvider extends ChangeNotifier {
   //   );
   //   notifyListeners();
   }
+// user - > saved : 6,2,8,3
+// user - > saved : 2,3,6,8 
+
+// list -> 1 ,2 ,3 
 
   // you can also have fetch/load methods here
 }

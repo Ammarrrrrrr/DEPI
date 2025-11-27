@@ -1,12 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
+import 'package:pharmacy_system/services/auth.dart';
+import 'package:pharmacy_system/services/store.dart';
 
 class LoginWithEmail extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
+  final StoreService _storeService = StoreService();
   LoginWithEmail({super.key});
 
   @override
@@ -58,7 +64,42 @@ class LoginWithEmail extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 50),
-                AppBotton(text: "Login", GoToPage: () {context.push(MainPage());}),
+                AppBotton(text: "Login", GoToPage: () async{
+                  final email = emailController.text.trim();
+                  final password = passwordController.text;
+
+                  if (email.isEmpty || password.isEmpty ) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please fill all fields')),
+                    );
+                    return;
+                  }
+
+                  final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+                  if (!emailRegex.hasMatch(email)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please enter a valid email address')),
+                    );
+                    return;
+                  }
+                  try {
+                    final user = await _authService.signinEmailPass(email, password);
+                    if(user == null){
+                      log('signin fail from firebase');
+                    }
+                    else{
+                      // context.push(MainPage());
+                      _storeService.getMyUser(user.email);
+                      log("user signin successfully ${user.uid}");
+                    }
+                  } catch (e) {
+                    log('signin error: $e');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('signin failed. Please try again.')),
+                    );
+                  }
+                  context.push(MainPage());
+                  }),
                 //SizedBox(height: 50),
               ],
             ),
