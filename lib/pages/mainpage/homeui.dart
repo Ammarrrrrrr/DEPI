@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/const/ui.dart';
 import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/mainpage/notifycationui.dart';
+import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +18,13 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final pro = Provider.of<HomeNotifier>(context);
     final store = Provider.of<StoreService>(context);
+    final user = Provider.of<User?>(context);
+    final saveditems = Provider.of<SavedItemsProvider>(context);
     if (pro.index == 0) {
       store.getProducts();
       pro.changeindex();
     }
+    // log(store.currentUser.toString());
     return Scaffold(
       body: SingleChildScrollView(
         // physics: AlwaysScrollableScrollPhysics(),
@@ -255,6 +260,8 @@ class Home extends StatelessWidget {
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
+                        bool isSaved =saveditems.productsIDs.any((element)=>element == store.productList[index].productId);
+                        // if(isSaved){saveditems.addProduct(store.productList[index]);}
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
@@ -294,9 +301,24 @@ class Home extends StatelessWidget {
                                     top: 0,
                                     right: 0,
                                     child: GestureDetector(
-                                      onTap: () => log('${store.productList[index].productId}'),
+                                      onTap: () async{
+                                        if(isSaved){
+                                          store.currentUser.saved.remove(store.productList[index].productId);
+                                          await store.saveUpdateCustomer(store.currentUser);
+                                          saveditems.removeProduct(store.productList[index]);
+                                          log('removed saved from user(${store.currentUser.name}) :${store.productList[index].productId}');
+                                        }
+                                        else{
+                                          store.currentUser.saved.add(store.productList[index].productId);
+                                          await store.saveUpdateCustomer(store.currentUser);
+                                          saveditems.addProduct(store.productList[index]);
+                                          log('added saved to user(${store.currentUser.name}) :${store.productList[index].productId}');
+                                        }
+                                      },
                                       child: Icon(
-                                        Icons.favorite_border,
+                                        color: Colors.red,
+                                        isSaved?
+                                        Icons.favorite:Icons.favorite_border,
                                         // color: const Color(0xFFFA3636),
                                         size: 21,
                                       ),

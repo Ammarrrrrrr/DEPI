@@ -7,19 +7,8 @@ import 'package:pharmacy_system/pages/custom-widgets/heart_botton.dart';
 class ContainerItem extends StatelessWidget {
   Coloring coloring = Coloring();
   final Product product;
-  // String image;
-  // String title;
-  // double currentPrice;
-  // double oldPrice;
-  // double rating;
-  // int ratingCount;
 
   ContainerItem({super.key, required this.product});
-  // {
-  //   image = product.imagePath;
-  //   title = product.title;
-
-  // }
 
   @override
   Widget build(BuildContext context) {

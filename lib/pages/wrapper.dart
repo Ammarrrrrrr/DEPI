@@ -29,7 +29,6 @@ class Wrapper extends StatelessWidget {
       final result = _storeService.getMyUser(user.email!);
       // if(result == null) _storeService.saveUpdateCustomer(user);
       // log("user: id:${user.uid} email:${user.email} name:${user.name} saved:${user.saved} cart:${user.cart}");
-      
       return MainPage();
       }
   }

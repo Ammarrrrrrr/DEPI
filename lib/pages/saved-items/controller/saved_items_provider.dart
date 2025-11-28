@@ -8,6 +8,7 @@ import 'package:pharmacy_system/services/store.dart';
 
 class SavedItemsProvider extends ChangeNotifier {
   final List<Product> _products = [];
+  List<String> productsIDs = [];
   List<Product> get products => _products;
   StoreService storeService = StoreService();
 
@@ -17,7 +18,12 @@ class SavedItemsProvider extends ChangeNotifier {
   }
 
   void removeProduct(Product product) {
+    productsIDs.remove(product.productId);
     _products.remove(product);
+    notifyListeners();
+  }
+  void removeAllProducts() {
+    _products.clear();
     notifyListeners();
   }
 
@@ -39,9 +45,9 @@ class SavedItemsProvider extends ChangeNotifier {
   //               price: Random().nextInt(200), 
   //               description: "uses: ${rows[i].elementAt(2)}, side effects: ${rows[i].elementAt(3)}"));
   // }
-  for (var i = 0; i < _products.length; i++) {
-    storeService.deleteProduct(_products[i].productId+(_products[i].title.split(' ')[0]));
-  }
+  // for (var i = 0; i < _products.length; i++) {
+  //   storeService.deleteProduct(_products[i].productId+(_products[i].title.split(' ')[0]));
+  // }
 
   //   _products.add(
   //     Product(

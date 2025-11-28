@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pharmacy_system/MainPage.dart';
+import 'package:pharmacy_system/model/model.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
@@ -146,7 +147,7 @@ class _SignupWithEmailState extends State<SignupWithEmail> {
                       log('Signup fail from firebase');
                     }
                     else{
-                      _storeService.saveUpdateCustomer(user);
+                      _storeService.saveUpdateCustomer(Customer(uid: user.uid, name: user.email??"", email: email, saved: [], cart: []));
                       // context.push(MainPage());
                       log("user singup successfully ${user.uid}");
                     }

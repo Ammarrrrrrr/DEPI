@@ -31,7 +31,7 @@ class StoreService extends ChangeNotifier {
         });
   }
 
-  Future<Customer?> getMyUser(String customerEmail) async {
+  Future<void> getMyUser(String customerEmail) async {
     final QuerySnapshot snapshot = await customerCollection
         .where("email", isEqualTo: customerEmail)
         .get();
@@ -39,16 +39,16 @@ class StoreService extends ChangeNotifier {
     // log("${snapshot.docs} ");
     if (snapshot.docs.isNotEmpty) {
 
-      log("got customer data: ${snapshot.docs[0]["name"]}");
+      // log("got customer data: ${snapshot.docs[0]["name"]}");
       currentUser = Customer(
         uid: snapshot.docs[0]["uid"], 
         name: snapshot.docs[0]["name"], 
         email: snapshot.docs[0]["email"], 
-        saved: snapshot.docs[0]["saved"], 
-        cart: snapshot.docs[0]["cart"]);
-      return currentUser;
+        saved: List.from(snapshot.docs[0]["saved"]), // the f************* error was that i didn't convert what is comming into a list manully
+        cart: List.from(snapshot.docs[0]["cart"]));
+      // return currentUser;      
     }
-    return null;
+    // return null;
   }
 
   Future<void> deleteCustomer(String docID) async {

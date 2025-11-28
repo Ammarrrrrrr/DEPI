@@ -22,6 +22,7 @@ import 'package:pharmacy_system/pages/profile/profile.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/pages/saved-items/saved_items.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/SubScreen.dart';
+import 'package:pharmacy_system/pages/wrapper.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 import 'package:pharmacy_system/pages/cart/model/cartModel.dart';
@@ -128,7 +129,7 @@ class MyApp extends StatelessWidget {
       //   '/SubScreen': (context) => const SubScreen(),
       // },
       // home: const Homescreen(),
-      home: const SplashScreen(),
+      home: Wrapper(),
     );
   }
 }

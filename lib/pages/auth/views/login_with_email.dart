@@ -5,18 +5,21 @@ import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
+import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/services/auth.dart';
 import 'package:pharmacy_system/services/store.dart';
+import 'package:provider/provider.dart';
 
 class LoginWithEmail extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final AuthService _authService = AuthService();
-  final StoreService _storeService = StoreService();
   LoginWithEmail({super.key});
 
   @override
   Widget build(BuildContext context) {
+  final StoreService _storeService = Provider.of<StoreService>(context);
+  final saved = Provider.of<SavedItemsProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       resizeToAvoidBottomInset: false,
@@ -64,42 +67,67 @@ class LoginWithEmail extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 50),
-                AppBotton(text: "Login", GoToPage: () async{
-                  final email = emailController.text.trim();
-                  final password = passwordController.text;
+                AppBotton(
+                  text: "Login",
+                  GoToPage: () async {
+                    final email = emailController.text.trim();
+                    final password = passwordController.text;
 
-                  if (email.isEmpty || password.isEmpty ) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Please fill all fields')),
-                    );
-                    return;
-                  }
+                    if (email.isEmpty || password.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Please fill all fields')),
+                      );
+                      return;
+                    }
 
-                  final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
-                  if (!emailRegex.hasMatch(email)) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Please enter a valid email address')),
-                    );
-                    return;
-                  }
-                  try {
-                    final user = await _authService.signinEmailPass(email, password);
-                    if(user == null){
-                      log('signin fail from firebase');
+                    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+                    if (!emailRegex.hasMatch(email)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Please enter a valid email address'),
+                        ),
+                      );
+                      return;
                     }
-                    else{
-                      // context.push(MainPage());
-                      _storeService.getMyUser(user.email);
-                      log("user signin successfully ${user.uid}");
+                    try {
+                      final user = await _authService.signinEmailPass(
+                        email,
+                        password,
+                      );
+                      if (user == null) {
+                        log('signin fail from firebase');
+                      } else {
+                        // context.push(MainPage());
+                        // _storeService.getMyUser(user.email??"");           forgot to type await ????????
+                        log("user signin successfully ${user.email}");
+                        await _storeService.getMyUser(user.email ?? "",); // ------------------------------ most important line
+                        saved.productsIDs = _storeService.currentUser.saved;
+                        saved.removeAllProducts();
+                        _storeService.productList.sort((a, b) => a.productId.compareTo(b.productId),);
+                        saved.productsIDs.sort();
+                        int j=0;
+                        for (var i = 0; i < _storeService.productList.length && j <saved.productsIDs.length; i++) {
+                          if(_storeService.productList[i].productId == saved.productsIDs[j]){
+                            saved.addProduct(_storeService.productList[i]);
+                            j++;
+                          }
+                        }
+                        log(saved.productsIDs.toString());
+                        // after logging in we will have : sorted products in _storeService and SavedItemsProvider.projuctList
+                        log("current user: ${_storeService.currentUser.toString()}");
+                        context.push(MainPage());
+                      }
+                    } catch (e) {
+                      log('signin error: $e');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('signin failed. Please try again.'),
+                        ),
+                      );
                     }
-                  } catch (e) {
-                    log('signin error: $e');
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('signin failed. Please try again.')),
-                    );
-                  }
-                  context.push(MainPage());
-                  }),
+                    
+                  },
+                ),
                 //SizedBox(height: 50),
               ],
             ),
