@@ -31,7 +31,6 @@ class _ProfileState extends State<Profile> {
             spacing: 6,
             children: [
               Text('Full Name'),
-
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -42,7 +41,6 @@ class _ProfileState extends State<Profile> {
               SizedBox(height: 10),
 
               Text('Email Address'),
-
               TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(border: OutlineInputBorder(),

@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/controller/pagenavigaterprovider.dart';
+import 'package:pharmacy_system/firebase_options.dart';
 import 'package:pharmacy_system/globalElements/controller/notyficationprovider.dart';
 import 'package:pharmacy_system/pages/auth/views/splash_screen.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/notyficationprovider.dart';
@@ -20,10 +22,16 @@ import 'package:pharmacy_system/pages/profile/profile.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/pages/saved-items/saved_items.dart';
 import 'package:pharmacy_system/pages/subScreen-testonly/SubScreen.dart';
+import 'package:pharmacy_system/pages/wrapper.dart';
+import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 import 'package:pharmacy_system/pages/cart/model/cartModel.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -31,6 +39,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => PagenavigatorNotifier()),
         ChangeNotifierProvider(create: (context) => Notyficationprovider()),
         ChangeNotifierProvider(create: (context) => SavedItemsProvider()),
+        ChangeNotifierProvider(create: (context) => StoreService()),
       ],
       child: MyApp(),
     ),
@@ -120,7 +129,7 @@ class MyApp extends StatelessWidget {
       //   '/SubScreen': (context) => const SubScreen(),
       // },
       // home: const Homescreen(),
-      home: const SplashScreen(),
+      home: Wrapper(),
     );
   }
 }
