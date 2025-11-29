@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'show rootBundle;
 import 'package:pharmacy_system/model/product.dart';
+import 'package:pharmacy_system/pages/admin/admin_ui.dart';
+import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
@@ -36,11 +38,12 @@ class CustomAppbar extends StatelessWidget {
           ), // only will leave this
         ),
         InkWell(
-          child: Icon(Icons.notifications_none, size: 30),
+          child: Icon(Icons.admin_panel_settings, size: 30),
           onTap: () {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text("Go to notifications page")));
+            context.push(AdminUi());
+            // ScaffoldMessenger.of(
+            //   context,
+            // ).showSnackBar(SnackBar(content: Text("Go to notifications page")));
           },
         ),
       ],

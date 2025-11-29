@@ -5,16 +5,18 @@ import '../../../const/ui.dart';
 import 'dashDivider.dart';
 
 class CartSummary extends StatelessWidget {
-  final double subTotal;
-  final double deliveryFee;
-  final double discount;
+  final double total;
+  // final double subTotal;
+  // final double deliveryFee;
+  // final double discount;
   final VoidCallback onCheckout;
 
   const CartSummary({
     super.key,
-    required this.subTotal,
-    required this.deliveryFee,
-    required this.discount,
+    required this.total,
+    // required this.subTotal,
+    // required this.deliveryFee,
+    // required this.discount,
     required this.onCheckout,
   });
 
@@ -22,7 +24,7 @@ class CartSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double total = subTotal + deliveryFee - discount;
+    // final double total = subTotal + deliveryFee - discount;
 
     return SafeArea(
       top: false,
@@ -42,12 +44,12 @@ class CartSummary extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _SummaryRow(label: 'Sub-total', value: _money(subTotal)),
-            SizedBox(height: 12),
-            _SummaryRow(label: 'Delivery Fee', value: _money(deliveryFee)),
-            SizedBox(height: 12),
-            _SummaryRow(label: 'Discount', value: "-${_money(discount)}"),
-            SizedBox(height: 12),
+            // _SummaryRow(label: 'Sub-total', value: _money(subTotal)),
+            // SizedBox(height: 12),
+            // _SummaryRow(label: 'Delivery Fee', value: _money(deliveryFee)),
+            // SizedBox(height: 12),
+            // _SummaryRow(label: 'Discount', value: "-${_money(discount)}"),
+            // SizedBox(height: 12),
             DashedDivider(color: Coloring().n200),
             SizedBox(height: 12),
             Row(

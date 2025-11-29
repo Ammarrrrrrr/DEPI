@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/model/product.dart';
+import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 
@@ -10,12 +11,17 @@ class HeartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final savedProvider = Provider.of<SavedItemsProvider>(context);
+    final store = Provider.of<StoreService>(context);
     return ChangeNotifierProvider(
       create: (_) => _HeartState(),
       child: Consumer<_HeartState>(
         builder: (context, heart, child) {
           return InkWell(
-            onTap: (){savedProvider.removeProduct(product);},
+            onTap: ()async{
+              store.currentUser.saved.remove(product.productId);
+              await store.saveUpdateCustomer(store.currentUser);
+              savedProvider.removeProduct(product);
+              },
             child: Icon(
               heart.selected ? Icons.favorite : Icons.favorite_border,
               color: Colors.red,
