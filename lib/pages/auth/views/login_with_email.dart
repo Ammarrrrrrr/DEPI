@@ -5,6 +5,7 @@ import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_field.dart';
+import 'package:pharmacy_system/pages/cart/controller/cart_provider.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/services/auth.dart';
 import 'package:pharmacy_system/services/store.dart';
@@ -20,6 +21,7 @@ class LoginWithEmail extends StatelessWidget {
   Widget build(BuildContext context) {
   final StoreService _storeService = Provider.of<StoreService>(context);
   final saved = Provider.of<SavedItemsProvider>(context);
+  final cart = Provider.of<CartProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       resizeToAvoidBottomInset: false,
@@ -101,14 +103,25 @@ class LoginWithEmail extends StatelessWidget {
                         // _storeService.getMyUser(user.email??"");           forgot to type await ????????
                         log("user signin successfully ${user.email}");
                         await _storeService.getMyUser(user.email ?? "",); // ------------------------------ most important line
+                        if( _storeService.productList.isEmpty) await _storeService.getProducts();
                         saved.productsIDs = _storeService.currentUser.saved;
+                        cart.productsIDs = _storeService.currentUser.cart;
                         saved.removeAllProducts();
+                        cart.removeAllProducts();
                         _storeService.productList.sort((a, b) => a.productId.compareTo(b.productId),);
                         saved.productsIDs.sort();
+                        cart.productsIDs.sort();
                         int j=0;
                         for (var i = 0; i < _storeService.productList.length && j <saved.productsIDs.length; i++) {
                           if(_storeService.productList[i].productId == saved.productsIDs[j]){
                             saved.addProduct(_storeService.productList[i]);
+                            j++;
+                          }
+                        }
+                        j=0;
+                        for (var i = 0; i < _storeService.productList.length && j <cart.productsIDs.length; i++) {
+                          if(_storeService.productList[i].productId == cart.productsIDs[j]){
+                            cart.addProduct(_storeService.productList[i]);
                             j++;
                           }
                         }

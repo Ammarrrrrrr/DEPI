@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/controller/pagenavigaterprovider.dart';
 import 'package:pharmacy_system/pages/account/account.dart';
+import 'package:pharmacy_system/pages/admin/admin_ui.dart';
 import 'package:pharmacy_system/pages/cart/cart.dart';
 import 'package:pharmacy_system/pages/mainpage/homeui.dart';
 import 'package:pharmacy_system/pages/profile/profile.dart';
@@ -22,7 +23,7 @@ class MainPage extends StatelessWidget {
       Home(),
       SavedItems(),
       Cart(cartItems: []),
-      Account(),
+
 
       
     ];
@@ -46,10 +47,10 @@ class MainPage extends StatelessWidget {
             icon: Icon(Icons.shopping_cart_outlined),
             label: 'Cart',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Account',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.person_outline),
+          //   label: 'Oreders',
+          // ),
         ],
       ),
       body: _widgetOptions[pro.pageindex],

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/const/ui.dart';
 import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
+import 'package:pharmacy_system/pages/cart/controller/cart_provider.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/mainpage/notifycationui.dart';
 import 'package:pharmacy_system/pages/mainpage/productui.dart';
+import 'package:pharmacy_system/pages/mainpage/searchui.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +23,9 @@ class Home extends StatelessWidget {
     final store = Provider.of<StoreService>(context);
     final user = Provider.of<User?>(context);
     final saveditems = Provider.of<SavedItemsProvider>(context);
+    final cartItems = Provider.of<CartProvider>(context);
     if (pro.index == 0) {
-      store.getProducts();
+      //  store.getProducts();
       pro.changeindex();
     }
     // log(store.currentUser.toString());
@@ -40,74 +43,42 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Logo', style: Fonts().heading4(color: Coloring().n950)),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Notifycation(),
-                      ),
-                    );
-                    // Action for "See All"
-                  },
-                  child: Icon(
-                    Icons.notifications_outlined,
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    size: 35,
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const Notifycation(),
+                //       ),
+                //     );
+                //     // Action for "See All"
+                //   },
+                //   child: Icon(
+                //     Icons.notifications_outlined,
+                //     color: const Color.fromARGB(255, 0, 0, 0),
+                //     size: 35,
+                //   ),
+                // ),
               ],
             ),
 
             Form(
               // key: xkey,
-              child: TextFormField(
-                // controller: _x,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Coloring().n500),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Coloring().p700),
-                  ),
-
-                  labelText: 'Find your favorite items',
-                  labelStyle: TextStyle(color: Coloring().n500),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      // Action for the close icon
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      size: 21,
-                    ),
-                  ),
-                  prefixIcon: GestureDetector(
-                    onTap: () {
-                      // Action for the search icon
-                    },
-                    child: Icon(
-                      Icons.search,
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      size: 25,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Coloring().n50,
-                ),
-
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  // if (!emailRegex.hasMatch(value)) {
-                  //   return 'Please enter a valid email';
-                  // }
-                  return null;
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Searchui()),
+                  );
                 },
+                child: TextField(
+              enabled: false,
+              decoration: InputDecoration(
+                hintText: "Search product...",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
               ),
             ),
 
@@ -264,6 +235,10 @@ class Home extends StatelessWidget {
                           (element) =>
                               element == store.productList[index].productId,
                         );
+                        bool inCart = cartItems.productsIDs.any(
+                          (Element) =>
+                              Element == store.productList[index].productId,
+                        );
                         // if(isSaved){saveditems.addProduct(store.productList[index]);}
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -282,6 +257,20 @@ class Home extends StatelessWidget {
                               );
                             },
                             //log('${store.productList[index].productId}'),
+                            // onTap: () async{
+                            //   if(inCart){
+                            //       store.currentUser.cart.remove(store.productList[index].productId);
+                            //       await store.saveUpdateCustomer(store.currentUser);
+                            //       cartItems.removeProduct(store.productList[index]);
+                            //       log('removed product ${store.productList[index].productId} from user cart(${store.currentUser.name})');
+                            //     }
+                            //     else{
+                            //       store.currentUser.cart.add(store.productList[index].productId);
+                            //       await store.saveUpdateCustomer(store.currentUser);
+                            //       cartItems.addProduct(store.productList[index]);
+                            //       log('added product ${store.productList[index].productId} from user cart(${store.currentUser.name})');
+                            //             }
+                            // },
                             child: Container(
                               //width: 160,
                               //height: 280,
@@ -292,20 +281,12 @@ class Home extends StatelessWidget {
                               ),
                               child: Stack(
                                 children: [
-                                  // Image.asset(
-                                  //   'assets/images/grid1.png',
-                                  //   //width: 270,
-                                  //   //height: 270,
-                                  //   //scale: .3,
-                                  //   //fit: BoxFit.cover,
-                                  // ),
                                   Positioned(
                                     child: Image(
                                       // width: 270,
                                       height: 150,
                                       image: NetworkImage(
                                         '${store.productList[index].imagePath}',
-
                                         //scale: .3,
                                       ),
                                     ),

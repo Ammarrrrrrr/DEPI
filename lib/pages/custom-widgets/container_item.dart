@@ -13,52 +13,35 @@ class ContainerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(8),
       width: 180, // fixed width for each item
       // height: 240,
       decoration: BoxDecoration(
-        // color: Colors.blue[100],
+        color: const Color(0xFFF4F4F4),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Column(
+      child: Stack(
         children: [
-          Stack(
+          
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image(image: AssetImage(product.imagePath)),
-              Image(image: NetworkImage(product.imagePath)),
-              Positioned(
-                top: 10,
-                right: 10,
+              Image(height: 180,image: NetworkImage(product.imagePath)),
+              Text(product.title, style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),maxLines: 2,),
+              Text(
+                    "\$${product.price}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  ),
+            ],
+          ),
+          Positioned(
+                top: 0,
+                right: 0,
                 child: HeartButton(product: product),
               ),
-            ],
-          ),
-          Text(product.title, style: TextStyle(fontSize: 22),maxLines: 3,),
-          Row(
-            spacing: 5,
-            children: [
-              // Text(
-              //   "${product.description}".toString(),
-              //   style: TextStyle(fontSize: 15),
-              // ), 
-              
-              Text(
-                "\$${product.price}",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18,
-                  decoration: TextDecoration.lineThrough,
-                ),
-              ),
-            ],
-          ),
-          // Row(
-          //   spacing: 5,
-          //   children: [
-          //     Icon(Icons.stars, color: Color(0xffF6BC2F)),
-          //     Text({product.rating}.toString()),
-          //     Text("(${product.ratingCount})"),
-          //   ],
-          // ),
         ],
       ),
     );

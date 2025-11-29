@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/const/colors.dart';
+import 'package:pharmacy_system/pages/cart/controller/cart_provider.dart';
 import 'package:pharmacy_system/pages/custom-widgets/container_item.dart';
 import 'package:pharmacy_system/pages/custom-widgets/appbar_title.dart';
 import 'package:pharmacy_system/pages/custom-widgets/empty_saved.dart';
+import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 
@@ -14,6 +18,10 @@ class SavedItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = context.watch<SavedItemsProvider>().products;
+    final savedItems = Provider.of<SavedItemsProvider>(context);
+    final store = Provider.of<StoreService>(context);
+    final cart = Provider.of<CartProvider>(context);
+    log("saved length: "+items.length.toString());
 
     return Scaffold(
       appBar:AppBar(
@@ -99,6 +107,8 @@ class SavedItems extends StatelessWidget {
                       spacing: 8.0, // horizontal gap between items
                       runSpacing: 8.0, // vertical gap between rows
                       children: items.map((item) {
+                        bool inCart = cart.productsIDs.contains(item.productId);
+
                         return ContainerItem(product: item);
                       }).toList(),
                     ),
