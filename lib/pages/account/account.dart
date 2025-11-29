@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/const/colors.dart';
+import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
+import 'package:pharmacy_system/pages/auth/views/home_screen.dart';
 import 'package:pharmacy_system/pages/custom-widgets/appbar_title.dart';
 import 'package:pharmacy_system/pages/profile/profile.dart';
 
@@ -89,52 +92,52 @@ class Account extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
         child: ListView(
           children: [
-            _buildMenuItem(
-              icon: Icons.person_outline,
-              text: 'Your Profile',
-              onTap: () {
-                // Navigator.pushNamed(context,'/Profile');
-                Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>  Profile()),
-                    );
-                },
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.person_outline,
+            //   text: 'Your Profile',
+            //   onTap: () {
+            //     // Navigator.pushNamed(context,'/Profile');
+            //     Navigator.push(
+            //           context,
+            //           MaterialPageRoute(builder: (context) =>  Profile()),
+            //         );
+            //     },
+            // ),
             _buildMenuItem(
               icon: Icons.receipt_long_outlined,
               text: 'My Order',
               onTap: () {},
             ),
-            _buildMenuItem(
-              icon: Icons.credit_card_outlined,
-              text: 'Payment Methods',
-              onTap: () {},
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.credit_card_outlined,
+            //   text: 'Payment Methods',
+            //   onTap: () {},
+            // ),
             _buildMenuItem(
               icon: Icons.notifications_none_outlined,
               text: 'Notifications',
               onTap: () {},
             ),
-            _buildMenuItem(
-              icon: Icons.lock_outline,
-              text: 'Privacy Policy',
-              onTap: () {},
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.lock_outline,
+            //   text: 'Privacy Policy',
+            //   onTap: () {},
+            // ),
             _buildMenuItem(
               icon: Icons.help_outline,
               text: 'Help Center',
               onTap: () {},
             ),
-            _buildMenuItem(
-              icon: Icons.person_add_alt,
-              text: 'Invite Friends',
-              onTap: () {},
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.person_add_alt,
+            //   text: 'Invite Friends',
+            //   onTap: () {},
+            // ),
             // const Divider(),
             ListTile(
               leading: Icon(Icons.power_settings_new, color: Colors.red),
               title: Text('Log Out', style: TextStyle(color: Colors.red)),
-              onTap: () {
+              onTap: () {context.push(HomeScreen());
                 // handle logout
               },
             ),

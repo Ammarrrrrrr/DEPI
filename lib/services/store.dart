@@ -8,9 +8,48 @@ import 'package:pharmacy_system/model/product.dart';
 class StoreService extends ChangeNotifier {
   CollectionReference customerCollection = FirebaseFirestore.instance.collection("customers");
   CollectionReference productCollection = FirebaseFirestore.instance.collection("products");
+  CollectionReference orderCollection = FirebaseFirestore.instance.collection("orders");
   List<Product> productList = [];
   Customer currentUser = Customer(uid: "uid", name: "name", email: "email", saved: [], cart: []);
+  // orders
+  Future<void> addOrder(Customer myCustomer,String address) async {
+    orderCollection.add({
+          "email": myCustomer.email,
+          "name": myCustomer.name,
+          "products": myCustomer.cart,
+          "address":address,
+          "finished":false
+        })
+        .then((value) {
+          log("Order Saved");
+        })
+        .catchError((error) {
+          log("Failed to save Order data to firestore: $error");
+        });
+  }
 
+  Future<List<QueryDocumentSnapshot<Object?>>?> getMyOrders(String customerEmail) async {
+    final QuerySnapshot snapshot = await orderCollection
+        .where("email", isEqualTo: customerEmail)
+        .get();
+    if (snapshot.docs.isNotEmpty) {
+      return snapshot.docs;      
+    }
+    return null;
+  }
+  Future<List<QueryDocumentSnapshot<Object?>>?> getAllOrders(String customerEmail) async {
+    final QuerySnapshot snapshot = await orderCollection.get();
+    if (snapshot.docs.isNotEmpty) {
+      return snapshot.docs;      
+    }
+    return null;
+  }
+
+  Future<void> deleteOrder(String docID) async {
+    await orderCollection.doc(docID).delete();
+  }
+
+  // Customer
   Future<void> saveUpdateCustomer(Customer myCustomer) async {
     // remove @gmail.com from email
     String docName = myCustomer.email.split("@")[0];

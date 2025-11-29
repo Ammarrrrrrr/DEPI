@@ -1,8 +1,5 @@
-import 'dart:developer';
-import 'dart:math' hide log;
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'show rootBundle;
+// import 'package:flutter/services.dart'show rootBundle;
 import 'package:pharmacy_system/model/product.dart';
 import 'package:pharmacy_system/services/store.dart';
 

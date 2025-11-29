@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy_system/model/product.dart';
+import 'package:pharmacy_system/pages/cart/controller/cart_provider.dart';
+import 'package:pharmacy_system/services/store.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/colors.dart';
 import '../../../const/images.dart';
 import '../../../const/ui.dart';
-import 'cartItemControl.dart';
+// import 'cartItemControl.dart';
 import '../model/cartModel.dart';
 
 class CartItemTile extends StatelessWidget {
-  final CartItem item;
+  final Product item;
   final ValueChanged<int> onQuantityChanged;
 
   const CartItemTile({
@@ -18,8 +22,10 @@ class CartItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String resolvedPath = (item.imageUrl.isNotEmpty)
-        ? item.imageUrl
+    final store = Provider.of<StoreService>(context);
+    final cart = Provider.of<CartProvider>(context);
+    final String resolvedPath = (item.imagePath.isNotEmpty)
+        ? item.imagePath
         : Images().onBoarding1;
 
     final ImageProvider imageProvider = resolvedPath.startsWith('http')
@@ -51,7 +57,7 @@ class CartItemTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  item.name,
+                  item.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Fonts().heading5(color: Coloring().n950),
@@ -65,10 +71,18 @@ class CartItemTile extends StatelessWidget {
             ),
           ),
           SizedBox(width: 12),
-          CartItemControl(
-            quantity: item.quantity,
-            onQuantityChanged: onQuantityChanged,
-          ),
+          InkWell(
+            onTap: ()async{
+              store.currentUser.cart.remove(item.productId);
+              await store.saveUpdateCustomer(store.currentUser);
+              cart.removeProduct(item);
+              },
+            child: Icon(
+              Icons.delete,
+              color: Colors.red,
+              size: 30,
+            ),
+          )
         ],
       ),
     );

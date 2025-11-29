@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 class AdminUi extends StatelessWidget {
   AdminUi({super.key});
-  final List<String> tabs = ['Ongoing', 'Complete', 'Review'];
+  final List<String> tabs = ['Ongoing', 'Complete'];
   final List<Map<String, String>> orders = [
     {
       'image': 'assets/images/product1.png',
@@ -57,11 +57,11 @@ class AdminUi extends StatelessWidget {
                     fontFamily: 'Satoshi',
                   ),
                 ),
-                SvgPicture.asset(
-                  'assets/icons/ic_fluent_alert_32_regular.svg',
-                  height: 30,
-                  width: 29,
-                ),
+                // SvgPicture.asset(
+                //   'assets/icons/ic_fluent_alert_32_regular.svg',
+                //   height: 30,
+                //   width: 29,
+                // ),
               ],
             ),
             SizedBox(height: 24),
