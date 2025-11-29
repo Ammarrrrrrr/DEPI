@@ -108,11 +108,9 @@ class LoginWithEmail extends StatelessWidget {
                         // context.push(MainPage());
                         // _storeService.getMyUser(user.email??"");           forgot to type await ????????
                         log("user signin successfully ${user.email}");
-                        await _storeService.getMyUser(
-                          user.email ?? "",
-                        ); // ------------------------------ most important line
-                        if (_storeService.productList.isEmpty)
-                          await _storeService.getProducts();
+                        await _storeService.getMyUser(user.email ?? "",); // ------------------------------ most important line
+                        await _storeService.getAllOrders();
+                        if( _storeService.productList.isEmpty) await _storeService.getProducts();
                         saved.productsIDs = _storeService.currentUser.saved;
                         cart.productsIDs = _storeService.currentUser.cart;
                         saved.removeAllProducts();

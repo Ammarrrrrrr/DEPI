@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pharmacy_system/model/model.dart';
+import 'package:pharmacy_system/model/order.dart';
 import 'package:pharmacy_system/model/product.dart';
 
 class StoreService extends ChangeNotifier {
@@ -10,6 +11,7 @@ class StoreService extends ChangeNotifier {
   CollectionReference productCollection = FirebaseFirestore.instance.collection("products");
   CollectionReference orderCollection = FirebaseFirestore.instance.collection("orders");
   List<Product> productList = [];
+  List<MyOrder> orders = [];
   Customer currentUser = Customer(uid: "uid", name: "name", email: "email", saved: [], cart: []);
   // orders
   Future<void> addOrder(Customer myCustomer,String address) async {
@@ -28,21 +30,36 @@ class StoreService extends ChangeNotifier {
         });
   }
 
-  Future<List<QueryDocumentSnapshot<Object?>>?> getMyOrders(String customerEmail) async {
+  Future<void> getMyOrders(String customerEmail) async {
     final QuerySnapshot snapshot = await orderCollection
         .where("email", isEqualTo: customerEmail)
         .get();
-    if (snapshot.docs.isNotEmpty) {
-      return snapshot.docs;      
+    if (snapshot.docs.isNotEmpty) {    
+      orders.clear(); 
+      for (int i=0; i<snapshot.docs.length;i++){
+      orders.add(MyOrder(
+        email: snapshot.docs[i]["email"], 
+        name: snapshot.docs[i]["name"], 
+        address: snapshot.docs[i]["address"], 
+        products:  List.from(snapshot.docs[i]["products"]), 
+        finished: snapshot.docs[i]["finished"]));
+      }
     }
-    return null;
   }
-  Future<List<QueryDocumentSnapshot<Object?>>?> getAllOrders(String customerEmail) async {
+  Future<void> getAllOrders() async {
     final QuerySnapshot snapshot = await orderCollection.get();
-    if (snapshot.docs.isNotEmpty) {
-      return snapshot.docs;      
+    if (snapshot.docs.isNotEmpty) {   
+      orders.clear(); 
+      log("got all orders");  
+      for (int i=0; i<snapshot.docs.length;i++){
+      orders.add(MyOrder(
+        email: snapshot.docs[i]["email"], 
+        name: snapshot.docs[i]["name"], 
+        address: snapshot.docs[i]["address"], 
+        products:  List.from(snapshot.docs[i]["products"]), 
+        finished: snapshot.docs[i]["finished"]));
+      }
     }
-    return null;
   }
 
   Future<void> deleteOrder(String docID) async {
