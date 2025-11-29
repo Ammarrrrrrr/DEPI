@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/views/login_home.dart';
+import 'package:pharmacy_system/pages/auth/views/login_with_email.dart';
 import 'package:pharmacy_system/pages/auth/widgets/app_botton.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -50,7 +51,10 @@ class HomeScreen extends StatelessWidget {
               AppBotton(
                 text: "Get Started",
                 GoToPage: () {
-                  context.push(LoginSignupPage(isLogin: false));
+                  context.push(
+                    //LoginSignupPage(isLogin: false)
+                    LoginWithEmail(),
+                    );
                 },
               ),
             ],
