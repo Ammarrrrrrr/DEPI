@@ -21,12 +21,18 @@ class SavedItems extends StatelessWidget {
     final savedItems = Provider.of<SavedItemsProvider>(context);
     final store = Provider.of<StoreService>(context);
     final cart = Provider.of<CartProvider>(context);
-    log("saved length: "+items.length.toString());
+    log("saved length: " + items.length.toString());
 
     return Scaffold(
-      appBar:AppBar(
-          automaticallyImplyLeading: false,
-          title: CustomAppbar(pageName: "Saved Items")),
+      appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Saved Items',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        
+      ),
       // bottomNavigationBar: Padding(
       //   padding: const EdgeInsets.symmetric(vertical: 20),
       //   child: Row(

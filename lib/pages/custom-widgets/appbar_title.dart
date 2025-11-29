@@ -18,7 +18,8 @@ class CustomAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final savedProvider = Provider.of<SavedItemsProvider>(context);
     final store = Provider.of<StoreService>(context);
-    return Row(
+    return 
+    Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         InkWell(

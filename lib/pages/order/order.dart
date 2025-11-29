@@ -8,12 +8,14 @@ class SingleOrder extends StatelessWidget {
   final String email;
   final String address;
   final List<String> productsIDs;
+  final bool finished;
   const SingleOrder({
     super.key,
     required this.name,
     required this.email,
     required this.address,
     required this.productsIDs,
+    required this.finished,
   });
 
   // helper that finds products in the store by id (robust to different id field names)
@@ -21,7 +23,10 @@ class SingleOrder extends StatelessWidget {
     final all = store.productList ?? [];
     final matched = all.where((p) {
       // try common id fields and compare as strings
-      final pidCandidates = <String?>[p.productId?.toString(), p.productId?.toString()];
+      final pidCandidates = <String?>[
+        p.productId?.toString(),
+        p.productId?.toString(),
+      ];
       return pidCandidates.any((c) => c != null && productsIDs.contains(c));
     }).toList();
     return matched;
@@ -39,22 +44,30 @@ class SingleOrder extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text(
+                name,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 6),
               Text(email, style: TextStyle(color: Colors.grey[700])),
               SizedBox(height: 6),
               Text(address, style: TextStyle(color: Colors.grey[700])),
               SizedBox(height: 16),
-              Text('Products', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+              Text(
+                'Products',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
               SizedBox(height: 8),
               FutureBuilder<List<Product>>(
                 future: _fetchProductsFromStore(_store),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 24.0),
-                      child: CircularProgressIndicator(),
-                    ));
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 24.0),
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
                   }
                   final products = snapshot.data ?? [];
                   if (products.isEmpty) {
@@ -77,8 +90,19 @@ class SingleOrder extends StatelessWidget {
 
                       return ListTile(
                         leading: (imageUrl.isNotEmpty)
-                            ? Image.network(imageUrl, width: 56, height: 56, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Icon(Icons.image))
-                            : Container(width:56, height:56, color: Colors.grey[200], child: Icon(Icons.image)),
+                            ? Image.network(
+                                imageUrl,
+                                width: 56,
+                                height: 56,
+                                fit: BoxFit.cover,
+                                errorBuilder: (_, __, ___) => Icon(Icons.image),
+                              )
+                            : Container(
+                                width: 56,
+                                height: 56,
+                                color: Colors.grey[200],
+                                child: Icon(Icons.image),
+                              ),
                         title: Text(title),
                         subtitle: Text('Price: \$${price}'),
                         // if you need to show quantity, you'll need to pass that with productsIDs (e.g. map id->qty)
@@ -86,7 +110,29 @@ class SingleOrder extends StatelessWidget {
                     },
                   );
                 },
-              )
+              ),
+              SizedBox(height: 20),
+              finished?SizedBox():
+              GestureDetector(
+                onTap: () => print("object"),
+                child: Center(
+                  child: Container(
+                    //width: 95,
+                    //height: 315,
+                    //alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.all(10),
+                    // margin: const EdgeInsets.only(left: 15),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(206, 87, 40, 218),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      'finish',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

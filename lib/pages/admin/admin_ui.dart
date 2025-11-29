@@ -165,7 +165,7 @@ class _AdminUiState extends State<AdminUi> {
 
                             return InkWell(
                               onTap: (){
-                                context.push(SingleOrder(name: name, email: email, address: address, productsIDs: products));
+                                context.push(SingleOrder(name: name, email: email, address: address, productsIDs: products,finished: tabProvider.selectedIndex == 1,));
                               },
                               child: Container(
                                 margin: EdgeInsets.only(bottom: 6),
