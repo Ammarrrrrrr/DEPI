@@ -7,6 +7,7 @@ import 'package:pharmacy_system/const/ui.dart';
 import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/mainpage/notifycationui.dart';
+import 'package:pharmacy_system/pages/mainpage/productui.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
@@ -239,7 +240,6 @@ class Home extends StatelessWidget {
             //     ],
             //   ),
             // ),
-
             Text('Hot Deals', style: Fonts().heading5(color: Coloring().n950)),
             store.productList.isEmpty
                 ? Text("no products")
@@ -260,12 +260,28 @@ class Home extends StatelessWidget {
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        bool isSaved =saveditems.productsIDs.any((element)=>element == store.productList[index].productId);
+                        bool isSaved = saveditems.productsIDs.any(
+                          (element) =>
+                              element == store.productList[index].productId,
+                        );
                         // if(isSaved){saveditems.addProduct(store.productList[index]);}
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
-                            onTap: () => log('${store.productList[index].productId}'),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Productui(
+                                    product: store.productList[index],
+                                  ),
+                                  // ProductDetailPage(
+                                  //   product: store.productList[index],
+                                  // ),
+                                ),
+                              );
+                            },
+                            //log('${store.productList[index].productId}'),
                             child: Container(
                               //width: 160,
                               //height: 280,
@@ -286,45 +302,59 @@ class Home extends StatelessWidget {
                                   Positioned(
                                     child: Image(
                                       // width: 270,
-                                        height: 150,
+                                      height: 150,
                                       image: NetworkImage(
                                         '${store.productList[index].imagePath}',
-                                        
-                            
-                                        
+
                                         //scale: .3,
                                       ),
                                     ),
                                   ),
-                            
+
                                   Positioned(
                                     top: 0,
                                     right: 0,
                                     child: GestureDetector(
-                                      onTap: () async{
-                                        if(isSaved){
-                                          store.currentUser.saved.remove(store.productList[index].productId);
-                                          await store.saveUpdateCustomer(store.currentUser);
-                                          saveditems.removeProduct(store.productList[index]);
-                                          log('removed saved from user(${store.currentUser.name}) :${store.productList[index].productId}');
-                                        }
-                                        else{
-                                          store.currentUser.saved.add(store.productList[index].productId);
-                                          await store.saveUpdateCustomer(store.currentUser);
-                                          saveditems.addProduct(store.productList[index]);
-                                          log('added saved to user(${store.currentUser.name}) :${store.productList[index].productId}');
+                                      onTap: () async {
+                                        if (isSaved) {
+                                          store.currentUser.saved.remove(
+                                            store.productList[index].productId,
+                                          );
+                                          await store.saveUpdateCustomer(
+                                            store.currentUser,
+                                          );
+                                          saveditems.removeProduct(
+                                            store.productList[index],
+                                          );
+                                          log(
+                                            'removed saved from user(${store.currentUser.name}) :${store.productList[index].productId}',
+                                          );
+                                        } else {
+                                          store.currentUser.saved.add(
+                                            store.productList[index].productId,
+                                          );
+                                          await store.saveUpdateCustomer(
+                                            store.currentUser,
+                                          );
+                                          saveditems.addProduct(
+                                            store.productList[index],
+                                          );
+                                          log(
+                                            'added saved to user(${store.currentUser.name}) :${store.productList[index].productId}',
+                                          );
                                         }
                                       },
                                       child: Icon(
                                         color: Colors.red,
-                                        isSaved?
-                                        Icons.favorite:Icons.favorite_border,
+                                        isSaved
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
                                         // color: const Color(0xFFFA3636),
                                         size: 21,
                                       ),
                                     ),
                                   ),
-                            
+
                                   Positioned(
                                     bottom: 25,
                                     left: 0,
