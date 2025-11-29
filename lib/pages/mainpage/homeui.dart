@@ -8,6 +8,8 @@ import 'package:pharmacy_system/globalElements/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/cart/controller/cart_provider.dart';
 // import 'package:pharmacy_system/pages/mainpage/controller/homeprovider.dart';
 import 'package:pharmacy_system/pages/mainpage/notifycationui.dart';
+import 'package:pharmacy_system/pages/mainpage/productui.dart';
+import 'package:pharmacy_system/pages/mainpage/searchui.dart';
 import 'package:pharmacy_system/pages/saved-items/controller/saved_items_provider.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
@@ -41,74 +43,42 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Logo', style: Fonts().heading4(color: Coloring().n950)),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Notifycation(),
-                      ),
-                    );
-                    // Action for "See All"
-                  },
-                  child: Icon(
-                    Icons.notifications_outlined,
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    size: 35,
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const Notifycation(),
+                //       ),
+                //     );
+                //     // Action for "See All"
+                //   },
+                //   child: Icon(
+                //     Icons.notifications_outlined,
+                //     color: const Color.fromARGB(255, 0, 0, 0),
+                //     size: 35,
+                //   ),
+                // ),
               ],
             ),
 
             Form(
               // key: xkey,
-              child: TextFormField(
-                // controller: _x,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Coloring().n500),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Coloring().p700),
-                  ),
-
-                  labelText: 'Find your favorite items',
-                  labelStyle: TextStyle(color: Coloring().n500),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      // Action for the close icon
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      size: 21,
-                    ),
-                  ),
-                  prefixIcon: GestureDetector(
-                    onTap: () {
-                      // Action for the search icon
-                    },
-                    child: Icon(
-                      Icons.search,
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      size: 25,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Coloring().n50,
-                ),
-
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  // if (!emailRegex.hasMatch(value)) {
-                  //   return 'Please enter a valid email';
-                  // }
-                  return null;
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Searchui()),
+                  );
                 },
+                child: TextField(
+              enabled: false,
+              decoration: InputDecoration(
+                hintText: "Search product...",
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
               ),
             ),
 
@@ -241,7 +211,6 @@ class Home extends StatelessWidget {
             //     ],
             //   ),
             // ),
-
             Text('Hot Deals', style: Fonts().heading5(color: Coloring().n950)),
             store.productList.isEmpty
                 ? Text("no products")
@@ -262,26 +231,46 @@ class Home extends StatelessWidget {
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        bool isSaved =saveditems.productsIDs.any((element)=>element == store.productList[index].productId);
-                        bool inCart = cartItems.productsIDs.any((Element) =>Element == store.productList[index].productId);
+                        bool isSaved = saveditems.productsIDs.any(
+                          (element) =>
+                              element == store.productList[index].productId,
+                        );
+                        bool inCart = cartItems.productsIDs.any(
+                          (Element) =>
+                              Element == store.productList[index].productId,
+                        );
                         // if(isSaved){saveditems.addProduct(store.productList[index]);}
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
-                            onTap: () async{
-                              if(inCart){
-                                  store.currentUser.cart.remove(store.productList[index].productId);
-                                  await store.saveUpdateCustomer(store.currentUser);
-                                  cartItems.removeProduct(store.productList[index]);
-                                  log('removed product ${store.productList[index].productId} from user cart(${store.currentUser.name})');
-                                }
-                                else{
-                                  store.currentUser.cart.add(store.productList[index].productId);
-                                  await store.saveUpdateCustomer(store.currentUser);
-                                  cartItems.addProduct(store.productList[index]);
-                                  log('added product ${store.productList[index].productId} from user cart(${store.currentUser.name})');
-                                        }
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Productui(
+                                    product: store.productList[index],
+                                  ),
+                                  // ProductDetailPage(
+                                  //   product: store.productList[index],
+                                  // ),
+                                ),
+                              );
                             },
+                            //log('${store.productList[index].productId}'),
+                            // onTap: () async{
+                            //   if(inCart){
+                            //       store.currentUser.cart.remove(store.productList[index].productId);
+                            //       await store.saveUpdateCustomer(store.currentUser);
+                            //       cartItems.removeProduct(store.productList[index]);
+                            //       log('removed product ${store.productList[index].productId} from user cart(${store.currentUser.name})');
+                            //     }
+                            //     else{
+                            //       store.currentUser.cart.add(store.productList[index].productId);
+                            //       await store.saveUpdateCustomer(store.currentUser);
+                            //       cartItems.addProduct(store.productList[index]);
+                            //       log('added product ${store.productList[index].productId} from user cart(${store.currentUser.name})');
+                            //             }
+                            // },
                             child: Container(
                               //width: 160,
                               //height: 280,
@@ -295,42 +284,58 @@ class Home extends StatelessWidget {
                                   Positioned(
                                     child: Image(
                                       // width: 270,
-                                        height: 150,
+                                      height: 150,
                                       image: NetworkImage(
                                         '${store.productList[index].imagePath}',
                                         //scale: .3,
                                       ),
                                     ),
                                   ),
-                            
+
                                   Positioned(
                                     top: 0,
                                     right: 0,
                                     child: GestureDetector(
-                                      onTap: () async{
-                                        if(isSaved){
-                                          store.currentUser.saved.remove(store.productList[index].productId);
-                                          await store.saveUpdateCustomer(store.currentUser);
-                                          saveditems.removeProduct(store.productList[index]);
-                                          log('removed saved from user(${store.currentUser.name}) :${store.productList[index].productId}');
-                                        }
-                                        else{
-                                          store.currentUser.saved.add(store.productList[index].productId);
-                                          await store.saveUpdateCustomer(store.currentUser);
-                                          saveditems.addProduct(store.productList[index]);
-                                          log('added saved to user(${store.currentUser.name}) :${store.productList[index].productId}');
+                                      onTap: () async {
+                                        if (isSaved) {
+                                          store.currentUser.saved.remove(
+                                            store.productList[index].productId,
+                                          );
+                                          await store.saveUpdateCustomer(
+                                            store.currentUser,
+                                          );
+                                          saveditems.removeProduct(
+                                            store.productList[index],
+                                          );
+                                          log(
+                                            'removed saved from user(${store.currentUser.name}) :${store.productList[index].productId}',
+                                          );
+                                        } else {
+                                          store.currentUser.saved.add(
+                                            store.productList[index].productId,
+                                          );
+                                          await store.saveUpdateCustomer(
+                                            store.currentUser,
+                                          );
+                                          saveditems.addProduct(
+                                            store.productList[index],
+                                          );
+                                          log(
+                                            'added saved to user(${store.currentUser.name}) :${store.productList[index].productId}',
+                                          );
                                         }
                                       },
                                       child: Icon(
                                         color: Colors.red,
-                                        isSaved?
-                                        Icons.favorite:Icons.favorite_border,
+                                        isSaved
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
                                         // color: const Color(0xFFFA3636),
                                         size: 21,
                                       ),
                                     ),
                                   ),
-                            
+
                                   Positioned(
                                     bottom: 25,
                                     left: 0,

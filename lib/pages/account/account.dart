@@ -113,11 +113,11 @@ class Account extends StatelessWidget {
             //   text: 'Payment Methods',
             //   onTap: () {},
             // ),
-            _buildMenuItem(
-              icon: Icons.notifications_none_outlined,
-              text: 'Notifications',
-              onTap: () {},
-            ),
+            // _buildMenuItem(
+            //   icon: Icons.notifications_none_outlined,
+            //   text: 'Notifications',
+            //   onTap: () {},
+            // ),
             // _buildMenuItem(
             //   icon: Icons.lock_outline,
             //   text: 'Privacy Policy',

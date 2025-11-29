@@ -25,62 +25,48 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     final cartItems = Provider.of<CartProvider>(context).products;
 
-    log("cart length: "+cartItems.length.toString());
+    log("cart length: " + cartItems.length.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.arrow_back_ios_new_outlined,
-                color: Coloring().n950,
-              ),
-            ),
-            Text("My Cart", style: Fonts().heading4(color: Coloring().n950)),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.notifications_none, color: Coloring().n950),
-            ),
-          ],
+        centerTitle: true,
+        title: Text("My Cart", style: Fonts().heading4(color: Coloring().n950)),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back_ios_new_outlined, color: Coloring().n950),
         ),
       ),
-      body: 
-      
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: 
-            cartItems.isEmpty
-                ? Center(
-                    child: Text(
-                      "Your cart is empty",
-                      style: Fonts().heading5(color: Coloring().n950),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: cartItems.isEmpty
+            ? Center(
+                child: Text(
+                  "Your cart is empty",
+                  style: Fonts().heading5(color: Coloring().n950),
+                ),
+              )
+            :
+              // Text("products")
+              ListView.separated(
+                itemCount: cartItems.length,
+                separatorBuilder: (context, index) => SizedBox(height: 0),
+                itemBuilder: (context, index) {
+                  final item = cartItems[index];
+                  return KeyedSubtree(
+                    key: ValueKey(item.productId),
+                    child: CartItemTile(
+                      item: item,
+                      onQuantityChanged: (q) {
+                        // Handle quantity changes
+                      },
                     ),
-                  )
-                : 
-                // Text("products")
-                ListView.separated(
-                    itemCount: cartItems.length,
-                    separatorBuilder: (context, index) => SizedBox(height: 0),
-                    itemBuilder: (context, index) {
-                      final item = cartItems[index];
-                      return KeyedSubtree(
-                        key: ValueKey(item.productId),
-                        child: CartItemTile(
-                          item: item,
-                          onQuantityChanged: (q) {
-                            // Handle quantity changes
-                          },
-                        ),
-                      );
-                    },
-                  ),
-          ),
-          
+                  );
+                },
+              ),
+      ),
+
       bottomNavigationBar: (_buildSummaryBar(context, cartItems)),
     );
   }
@@ -88,16 +74,16 @@ class _CartState extends State<Cart> {
   Widget _buildSummaryBar(BuildContext context, List<Product> cartItems) {
     int total = 0;
     cartItems.forEach((element) {
-      total+=element.price;
-    },);
+      total += element.price;
+    });
 
     return CartSummary(
       total: total.toDouble(),
       onCheckout: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Proceeding to checkout...')),
-        );
-         Navigator.push(
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Proceeding to checkout...')));
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => Addresspage()),
         );
