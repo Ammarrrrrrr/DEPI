@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final  _storeService = Provider.of<StoreService>(context);
     final user = Provider.of<User?>(context);//custemer
-    log("wrapper listening user: $user");
+    // log("wrapper listening user: $user");
     // ignore: unnecessary_null_comparison
     // if(user == null){}
     // else if(!user.isAnonymous) _storeService.getMyUser(user);

@@ -51,11 +51,13 @@ class _AdminUiState extends State<AdminUi> {
           for (int i = 0; i < docs.length; i++) {
             orders.add(
               MyOrder(
+                dateTime: docs[i]["dateTime"],
                 email: docs[i]["email"],
                 name: docs[i]["name"],
                 address: docs[i]["address"],
                 products: List.from(docs[i]["products"]),
                 finished: docs[i]["finished"],
+                
               ),
             );
           }
@@ -162,10 +164,11 @@ class _AdminUiState extends State<AdminUi> {
                             final email = displayList[index].email;
                             final address = displayList[index].address;
                             final products = displayList[index].products;
+                            final date = displayList[index].dateTime;
 
                             return InkWell(
                               onTap: (){
-                                context.push(SingleOrder(name: name, email: email, address: address, productsIDs: products,finished: tabProvider.selectedIndex == 1,));
+                                context.push(SingleOrder(date:date, name: name, email: email, address: address, productsIDs: products,finished: tabProvider.selectedIndex == 1,));
                               },
                               child: Container(
                                 margin: EdgeInsets.only(bottom: 6),

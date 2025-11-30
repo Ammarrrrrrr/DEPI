@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy_system/model/model.dart';
 import 'package:pharmacy_system/model/product.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +10,10 @@ class SingleOrder extends StatelessWidget {
   final String address;
   final List<String> productsIDs;
   final bool finished;
+  final String date;
   const SingleOrder({
     super.key,
+    required this.date,
     required this.name,
     required this.email,
     required this.address,
@@ -114,7 +117,19 @@ class SingleOrder extends StatelessWidget {
               SizedBox(height: 20),
               finished?SizedBox():
               GestureDetector(
-                onTap: () => print("object"),
+                onTap: () async {
+                  Customer tempCustomer = Customer(
+                    uid: _store.currentUser.uid, 
+                    name: _store.currentUser.name, 
+                    email: _store.currentUser.email, 
+                    saved: _store.currentUser.saved, 
+                    cart: productsIDs);
+                  await _store.saveUpdateOrder(tempCustomer, address,true,date);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Order Finished')),
+                  );
+                  Navigator.pop(context);
+                },
                 child: Center(
                   child: Container(
                     //width: 95,

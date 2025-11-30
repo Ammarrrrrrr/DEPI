@@ -40,7 +40,7 @@ class Addresspage extends StatelessWidget {
         }
         else{
           // add order into firestore
-          await store.addOrder(store.currentUser, _addressController.text);
+          await store.saveUpdateOrder(store.currentUser, _addressController.text,false,"");
           store.currentUser.cart.clear();
           await store.saveUpdateCustomer(store.currentUser);
           cartItems.clear();
