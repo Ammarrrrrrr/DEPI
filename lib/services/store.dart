@@ -14,20 +14,42 @@ class StoreService extends ChangeNotifier {
   List<MyOrder> orders = [];
   Customer currentUser = Customer(uid: "uid", name: "name", email: "email", saved: [], cart: []);
   // orders
-  Future<void> addOrder(Customer myCustomer,String address) async {
-    orderCollection.add({
-          "email": myCustomer.email,
-          "name": myCustomer.name,
-          "products": myCustomer.cart,
-          "address":address,
-          "finished":false
-        })
-        .then((value) {
-          log("Order Saved");
-        })
-        .catchError((error) {
-          log("Failed to save Order data to firestore: $error");
-        });
+  Future<void> saveUpdateOrder(Customer myCustomer,String address,bool orderFinished,String date) async {
+    // String foldValue = myCustomer.cart.fold<String>("",(previousValue, element) =>previousValue+element);
+    DateTime now = DateTime.now();
+    if(orderFinished){
+      String docName = myCustomer.name+date;
+      orderCollection.doc(docName).set({
+            "email": myCustomer.email,
+            "name": myCustomer.name,
+            "products": myCustomer.cart,
+            "address":address,
+            "finished":orderFinished,
+            "dateTime":date
+          })
+          .then((value) {
+            log("Order Saved");
+          })
+          .catchError((error) {
+            log("Failed to save Order data to firestore: $error");
+          });
+        return;
+    }
+    String docName = myCustomer.name+now.toString();
+    orderCollection.doc(docName).set({
+        "email": myCustomer.email,
+        "name": myCustomer.name,
+        "products": myCustomer.cart,
+        "address":address,
+        "finished":orderFinished,
+        "dateTime":now.toString()
+      })
+      .then((value) {
+        log("Order Saved");
+      })
+      .catchError((error) {
+        log("Failed to save Order data to firestore: $error");
+      });
   }
 
   Future<void> getMyOrders(String customerEmail) async {
@@ -38,6 +60,7 @@ class StoreService extends ChangeNotifier {
       orders.clear(); 
       for (int i=0; i<snapshot.docs.length;i++){
       orders.add(MyOrder(
+        dateTime: snapshot.docs[i]["dateTime"],
         email: snapshot.docs[i]["email"], 
         name: snapshot.docs[i]["name"], 
         address: snapshot.docs[i]["address"], 
@@ -53,6 +76,7 @@ class StoreService extends ChangeNotifier {
       log("got all orders");  
       for (int i=0; i<snapshot.docs.length;i++){
       orders.add(MyOrder(
+        dateTime: snapshot.docs[i]["dateTime"],
         email: snapshot.docs[i]["email"], 
         name: snapshot.docs[i]["name"], 
         address: snapshot.docs[i]["address"], 
