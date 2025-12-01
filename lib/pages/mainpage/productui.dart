@@ -63,12 +63,14 @@ class Productui extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             // margin: const EdgeInsets.only(left: 15),
             decoration: BoxDecoration(
-              color: Coloring().p400,
+              color: !cartItems.products.any((item)=>item.productId==product.productId)? 
+              Coloring().p400 : Coloring().n600,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Text(
-                'Add to cart',
+                !cartItems.products.any((item)=>item.productId==product.productId)?
+                'Add to cart' : "Remove from cart",
                 style: TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,

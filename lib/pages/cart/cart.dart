@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_system/const/colors.dart';
 import 'package:pharmacy_system/const/ui.dart';
 import 'package:pharmacy_system/model/product.dart';
+import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/cart/addressPage.dart';
 import 'package:pharmacy_system/pages/cart/controller/cart_provider.dart';
 import 'package:pharmacy_system/pages/cart/uiElements/item.dart';
 import 'package:pharmacy_system/pages/cart/uiElements/summary.dart';
 import 'package:pharmacy_system/pages/cart/model/cartModel.dart';
+import 'package:pharmacy_system/pages/order/user_orders.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Cart extends StatefulWidget {
   final List<CartItem> cartItems;
@@ -31,6 +34,18 @@ class _CartState extends State<Cart> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
+        actions: [
+          // FaIcon(
+          //   FontAwesomeIcons.cartFlatbed,
+          //   size: 28,      
+          //   color: Colors.black,
+          // ),
+          IconButton(
+            onPressed: (){
+              context.push(UserOrders());
+        }, 
+        icon: Icon(Icons.shopping_cart))
+        ],
         centerTitle: true,
         title: Text("My Cart", style: Fonts().heading4(color: Coloring().n950)),
         leading: IconButton(

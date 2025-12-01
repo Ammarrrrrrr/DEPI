@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/MainPage.dart';
+import 'package:pharmacy_system/model/model.dart';
 import 'package:pharmacy_system/pages/admin/admin_ui.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
 import 'package:pharmacy_system/pages/auth/views/signup_with_email.dart';
@@ -95,19 +96,32 @@ class LoginWithEmail extends StatelessWidget {
                     }
                     try {
                       if(email == "ad@ad.ad" && password == "admin") {
+                        // _storeService.currentUser = Customer(uid: "uid", name: "name", email: "email", saved: [], cart: []);
+                        if( _storeService.productList.isEmpty) await _storeService.getProducts();
                         context.push(AdminUi());
                         return;
-                      }else{
+                      }
+                      else{
                       final user = await _authService.signinEmailPass(
                         email,
                         password,
                       );
                       if (user == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('signin failed. Try to create account'),
+                        ),
+                      );
                         log('signin fail from firebase');
                       } else {
                         // context.push(MainPage());
                         // _storeService.getMyUser(user.email??"");           forgot to type await ????????
                         log("user signin successfully ${user.email}");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('signin successfully'),
+                          ),
+                        );
                         await _storeService.getMyUser(user.email ?? "",); // ------------------------------ most important line
                         await _storeService.getAllOrders();
                         if( _storeService.productList.isEmpty) await _storeService.getProducts();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppField extends StatefulWidget {
   const AppField({
@@ -37,6 +38,7 @@ class _AppFieldState extends State<AppField> {
             height: 55,
             width: 340,
             child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
               controller: widget.controller,
               obscureText: widget.isPass ? isVisible : false,
               decoration: InputDecoration(

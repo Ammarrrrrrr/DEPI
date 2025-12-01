@@ -5,7 +5,7 @@ import 'package:pharmacy_system/model/order.dart';
 import 'package:pharmacy_system/model/product.dart';
 import 'package:pharmacy_system/pages/admin/controller/admin_provider.dart';
 import 'package:pharmacy_system/pages/auth/controllers/navigator.dart';
-import 'package:pharmacy_system/pages/order/order.dart';
+import 'package:pharmacy_system/pages/order/single_order.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,7 +23,6 @@ class _AdminUiState extends State<AdminUi> {
   @override
   Widget build(BuildContext context) {
     final tabProvider = Provider.of<TabProvider>(context);
-    final _store = Provider.of<StoreService>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,

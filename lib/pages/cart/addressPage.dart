@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pharmacy_system/MainPage.dart';
+import 'package:pharmacy_system/controller/pagenavigaterprovider.dart';
 import 'package:pharmacy_system/model/product.dart';
 import 'package:pharmacy_system/pages/cart/controller/cart_provider.dart';
 import 'package:pharmacy_system/pages/cart/uiElements/summary.dart';
@@ -15,6 +17,7 @@ class Addresspage extends StatelessWidget {
     final store = Provider.of<StoreService>(context); 
     final _addressController = TextEditingController();
     final cartItems = Provider.of<CartProvider>(context).products;
+    final homeprovider = Provider.of<PagenavigatorNotifier>(context);
     return Scaffold(
       appBar: AppBar(title: Text("Finish Order"),),
       body: Padding(padding: EdgeInsets.symmetric(horizontal: 10,vertical: 50),
@@ -47,7 +50,11 @@ class Addresspage extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Order Finished')),
           );
-          Navigator.pop(context);
+          // Navigator.pushReplacement(context, MainPage());
+          homeprovider.changeindex(0);
+          Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (_) => MainPage()),
+          );
         }
       },
     ),

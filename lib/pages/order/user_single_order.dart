@@ -4,14 +4,14 @@ import 'package:pharmacy_system/model/product.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 
-class SingleOrder extends StatelessWidget {
+class UserSingleOrder extends StatelessWidget {
   final String name;
   final String email;
   final String address;
   final List<String> productsIDs;
   final bool finished;
   final String date;
-  const SingleOrder({
+  const UserSingleOrder({
     super.key,
     required this.date,
     required this.name,
@@ -115,39 +115,25 @@ class SingleOrder extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20),
-              finished?SizedBox():
-              GestureDetector(
-                onTap: () async {
-                  Customer tempCustomer = Customer(
-                    uid: _store.currentUser.uid, 
-                    name: _store.currentUser.name, 
-                    email: _store.currentUser.email, 
-                    saved: _store.currentUser.saved, 
-                    cart: productsIDs);
-                  await _store.saveUpdateOrder(tempCustomer, address,true,date);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Order Finished')),
-                  );
-                  Navigator.pop(context);
-                },
-                child: Center(
+              finished?
+              Center(
                   child: Container(
-                    //width: 95,
-                    //height: 315,
-                    //alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.all(10),
-                    // margin: const EdgeInsets.only(left: 15),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(206, 87, 40, 218),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
                     child: Text(
-                      'finish',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      'finished order',
+                      style: TextStyle(fontSize: 16, color: Colors.blue),
+                    ),
+                  ),
+                ):
+              Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      'Ongoing order',
+                      style: TextStyle(fontSize: 16, color: Colors.blue),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

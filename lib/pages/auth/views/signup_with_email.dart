@@ -145,11 +145,18 @@ class _SignupWithEmailState extends State<SignupWithEmail> {
                     final user = await _authService.registerEmailPass(email, password);
                     if(user == null){
                       log('Signup fail from firebase');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Signup failed. Try to Login')),
+                      );
                     }
                     else{
                       _storeService.saveUpdateCustomer(Customer(uid: user.uid, name: user.email??"", email: email, saved: [], cart: []));
                       // context.push(MainPage());
-                      log("user singup successfully ${user.uid}");
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('singup successfully')),
+                      );
+                      if( _storeService.productList.isEmpty) await _storeService.getProducts();
+                      context.push(MainPage());
                     }
                   } catch (e) {
                     log('Signup error: $e');
