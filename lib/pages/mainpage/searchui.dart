@@ -13,7 +13,9 @@ class Searchui extends StatelessWidget {
     final pro = Provider.of<HomeNotifier>(context);
     final store = Provider.of<StoreService>(context);
     return Scaffold(
-      appBar: AppBar(title: Text("Product Search")),
+      appBar: AppBar(
+        backgroundColor: Color(0xFFD6EEF0),
+        title: Text("Product Search")),
       body: Column(
         children: [
           // 🔍 Search Box

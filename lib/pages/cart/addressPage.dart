@@ -24,6 +24,7 @@ class Addresspage extends StatelessWidget {
     final cartItems = Provider.of<CartProvider>(context).products;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFD6EEF0),
         centerTitle: true,
         title: Text("Address", style: Fonts().heading4(color: Coloring().n950)),
       ),
