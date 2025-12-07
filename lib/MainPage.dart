@@ -24,7 +24,6 @@ class MainPage extends StatelessWidget {
       SavedItems(),
       Cart(cartItems: []),
 
-
       
     ];
     return Scaffold(
@@ -33,7 +32,7 @@ class MainPage extends StatelessWidget {
         selectedItemColor: Coloring().p500,
         unselectedItemColor: Colors.grey,
         iconSize: 25,
-        onTap: (value) => pro.changeindex(value),
+        onTap: (value) => pro.changeindex(value, context),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -46,6 +45,10 @@ class MainPage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined),
             label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.logout),
+            label: 'Logout',
           ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.person_outline),
