@@ -105,7 +105,7 @@ class Addresspage extends StatelessWidget {
             Provider.of<PagenavigatorNotifier>(
               context,
               listen: false,
-            ).changeindex(0);
+            ).changeindex(0, context);
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const MainPage()),

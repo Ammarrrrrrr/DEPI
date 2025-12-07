@@ -286,7 +286,7 @@ class Home extends StatelessWidget {
                                     child: Center(
                                       child: Image(
                                         // width: 270,
-                                        height: 160,
+                                        height: 150,
                                         image: NetworkImage(
                                           '${store.productList[index].imagePath}',
                                           //scale: .3,

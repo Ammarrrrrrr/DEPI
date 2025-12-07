@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/model/model.dart';
-import 'package:pharmacy_system/pages/auth/views/home_screen.dart';
+import 'package:pharmacy_system/pages/onBoarding/HomeScreen.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +24,7 @@ class Wrapper extends StatelessWidget {
 
     // _storeService.getProducts();
     // log(  "user: id:${user?.uid} email:${user?.email} name:${user?.name} saved:${user?.saved} cart:${user?.cart}");
-    if(user == null) return HomeScreen();
+    if(user == null) return Homescreen();
     else{
       final result = _storeService.getMyUser(user.email!);
       // if(result == null) _storeService.saveUpdateCustomer(user);
