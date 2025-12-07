@@ -282,15 +282,19 @@ class Home extends StatelessWidget {
                               child: Stack(
                                 children: [
                                   Positioned(
-                                    child: Image(
-                                      // width: 270,
-                                      height: 150,
-                                      image: NetworkImage(
-                                        '${store.productList[index].imagePath}',
-                                        //scale: .3,
+
+                                    child: Center(
+                                      child: Image(
+                                        // width: 270,
+                                        height: 160,
+                                        image: NetworkImage(
+                                          '${store.productList[index].imagePath}',
+                                          //scale: .3,
+                                        ),
                                       ),
                                     ),
                                   ),
+
 
                                   Positioned(
                                     top: 0,

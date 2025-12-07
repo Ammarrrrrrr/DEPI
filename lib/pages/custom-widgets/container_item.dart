@@ -30,7 +30,7 @@ class ContainerItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(8),
         width: 180, // fixed width for each item
-        // height: 240,
+        // height: 270,
         decoration: BoxDecoration(
           color: const Color(0xFFF4F4F4),
           borderRadius: BorderRadius.circular(8),
@@ -41,7 +41,8 @@ class ContainerItem extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image(height: 180,image: NetworkImage(product.imagePath)),
+                //checklllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                Center(child: Image(height: 180,image: NetworkImage(product.imagePath))),
                 Text(product.title, style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),maxLines: 2,),
                 Text(
                       "\$${product.price}",

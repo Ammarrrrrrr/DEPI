@@ -28,7 +28,7 @@ class SavedItems extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: Text(
-          'Saved Items',
+          'Saved Items (${items.length})',
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
         
@@ -105,18 +105,17 @@ class SavedItems extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "${items.length} Items",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Wrap(
-                      spacing: 8.0, // horizontal gap between items
-                      runSpacing: 8.0, // vertical gap between rows
-                      children: items.map((item) {
-                        bool inCart = cart.productsIDs.contains(item.productId);
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Wrap(
+                        spacing: 8.0, // horizontal gap between items
+                        runSpacing: 8.0, // vertical gap between rows
+                        children: items.map((item) {
+                          bool inCart = cart.productsIDs.contains(item.productId);
 
-                        return ContainerItem(product: item);
-                      }).toList(),
+                          return ContainerItem(product: item);
+                        }).toList(),
+                      ),
                     ),
                   ],
                 ),
