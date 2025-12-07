@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_system/MainPage.dart';
 import 'package:pharmacy_system/pages/admin/admin_ui.dart';
@@ -94,10 +95,10 @@ class LoginWithEmail extends StatelessWidget {
                       return;
                     }
                     try {
-                      if(email == "ad@ad.ad" && password == "admin") {
-                        context.push(AdminUi());
-                        return;
-                      }else{
+                      // if (email == "ad@ad.ad" && password == "admin") {
+                      //   context.push(AdminUi());
+                      //   return;
+                      // } else {
                       final user = await _authService.signinEmailPass(
                         email,
                         password,
@@ -108,9 +109,12 @@ class LoginWithEmail extends StatelessWidget {
                         // context.push(MainPage());
                         // _storeService.getMyUser(user.email??"");           forgot to type await ????????
                         log("user signin successfully ${user.email}");
-                        await _storeService.getMyUser(user.email ?? "",); // ------------------------------ most important line
+                        await _storeService.getMyUser(
+                          user.email ?? "",
+                        ); // ------------------------------ most important line
                         await _storeService.getAllOrders();
-                        if( _storeService.productList.isEmpty) await _storeService.getProducts();
+                        if (_storeService.productList.isEmpty)
+                          await _storeService.getProducts();
                         saved.productsIDs = _storeService.currentUser.saved;
                         cart.productsIDs = _storeService.currentUser.cart;
                         saved.removeAllProducts();
@@ -151,8 +155,22 @@ class LoginWithEmail extends StatelessWidget {
                         log(
                           "current user: ${_storeService.currentUser.toString()}",
                         );
-                        context.push(MainPage());
-                      }
+
+                        
+                        String uid = user.uid;
+                        if (uid == "I9ksomYnqMMUyM9FjgmnTsEWBjF3") {
+                          context.push(AdminUi());
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   MaterialPageRoute(builder: (_) => ()),
+                          // );
+                        } else {
+                          context.push(MainPage());
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   MaterialPageRoute(builder: (_) => MainPage()),
+                          // );
+                        }
                       }
                     } catch (e) {
                       log('signin error: $e');
@@ -181,7 +199,9 @@ class LoginWithEmail extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignupWithEmail()),
+                            MaterialPageRoute(
+                              builder: (context) => SignupWithEmail(),
+                            ),
                           );
                         },
                         child: Text(

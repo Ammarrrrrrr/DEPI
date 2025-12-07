@@ -98,7 +98,7 @@ class _AdminUiState extends State<AdminUi> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: tabProvider.selectedIndex == 0
-                              ? Color(0xFF452CE8)
+                              ? Color(0xff71D3D5)
                               : Colors.grey[300],
                         ),
                         onPressed: () => tabProvider.selectTab(0),
@@ -117,7 +117,7 @@ class _AdminUiState extends State<AdminUi> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: tabProvider.selectedIndex == 1
-                              ? Color(0xFF452CE8)
+                              ? Color(0xff71D3D5)
                               : Colors.grey[300],
                         ),
                         onPressed: () => tabProvider.selectTab(1),

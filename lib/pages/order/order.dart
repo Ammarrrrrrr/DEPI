@@ -40,7 +40,9 @@ class SingleOrder extends StatelessWidget {
     final _store = Provider.of<StoreService>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Order Details')),
+      appBar: AppBar(
+        backgroundColor: Color(0xFFD6EEF0),
+        title: Text('Order Details')),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         child: SingleChildScrollView(
@@ -138,7 +140,7 @@ class SingleOrder extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     // margin: const EdgeInsets.only(left: 15),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(206, 87, 40, 218),
+                      color: const Color.fromARGB(255, 105, 202, 204),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
