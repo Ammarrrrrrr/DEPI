@@ -14,11 +14,9 @@ import 'package:pharmacy_system/pages/wrapper.dart';
 import 'package:pharmacy_system/services/store.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MultiProvider(
       providers: [
@@ -98,6 +96,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(
           primary: Coloring().p900,
           background: Coloring().p100,
+          // : Color.fromARGB(255, 90, 189, 194)
         ),
       ),
       darkTheme: ThemeData(

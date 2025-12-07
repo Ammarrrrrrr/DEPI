@@ -23,14 +23,18 @@ class MainPage extends StatelessWidget {
       Home(),
       SavedItems(),
       Cart(cartItems: []),
+      SizedBox()
 
       
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        // fixedColor: Color(0xff1d1d1d),
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color.fromARGB(255, 1, 116, 114),
         currentIndex: pro.iconindex,
-        selectedItemColor: Coloring().p500,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Coloring().p500 ,
         iconSize: 25,
         onTap: (value) => pro.changeindex(value, context),
         items: const <BottomNavigationBarItem>[
@@ -55,7 +59,9 @@ class MainPage extends StatelessWidget {
           //   label: 'Oreders',
           // ),
         ],
+        
       ),
+      
       body: _widgetOptions[pro.pageindex],
     );
   }

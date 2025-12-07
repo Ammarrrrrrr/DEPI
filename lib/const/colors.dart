@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Coloring {
-  final p0 = Color(0xFFFFFFFF);
+  final p0 = Color(0xFFD6EEF0);
   //Primary Colors
   final p50 = Color(0xffebefff);
   final p100 = Color(0xffdae2ff);
   final p200 = Color(0xffbcc8ff);
   final p300 = Color(0xff94a3ff);
   final p400 = Color(0xff6a70ff);
-  final p500 = Color(0xff4f48ff);
-  final p600 = Color(0xff4027ff);
-  final p700 = Color(0xff452ce8);
-  final p800 = Color(0xff2c1ab9);
-  final p900 = Color(0xff291e91);
+  final p500 = Color(0xff71D3D5);
+  final p600 = Color(0xff71D3D5);
+  final p700 = Color(0xff71D3D5);
+  final p800 = Color(0xff71D3D5);
+  final p900 = Color.fromARGB(255, 69, 138, 139);
   final p950 = Color(0xff1a1254);
 
   //Neutral Colors

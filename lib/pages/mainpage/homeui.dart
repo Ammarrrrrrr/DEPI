@@ -40,9 +40,28 @@ class Home extends StatelessWidget {
           children: [
             SizedBox(height: 10),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              spacing: 10,
               children: [
-                Text('Logo', style: Fonts().heading4(color: Coloring().n950)),
+                
+                
+                Container(
+                  //width: 95,
+                  //height: 315,
+                  //alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.all(10),
+                  // margin: const EdgeInsets.only(left: 15),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 66, 136, 143),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Image.asset(
+                  'assets/images/medicine.png',
+                  scale: 15.5,
+                ),
+                ),
+                Text('Pharmanet', style: Fonts().heading4(color: Coloring().n950)),
+
                 // TextButton(
                 //   onPressed: () {
                 //     Navigator.push(
@@ -72,13 +91,13 @@ class Home extends StatelessWidget {
                   );
                 },
                 child: TextField(
-              enabled: false,
-              decoration: InputDecoration(
-                hintText: "Search product...",
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
-              ),
-            ),
+                  enabled: false,
+                  decoration: InputDecoration(
+                    hintText: "Search product...",
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.search),
+                  ),
+                ),
               ),
             ),
 
@@ -276,13 +295,12 @@ class Home extends StatelessWidget {
                               //height: 280,
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF4F4F4),
+                                color: const Color(0xFFEAFBFC),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Stack(
                                 children: [
                                   Positioned(
-
                                     child: Center(
                                       child: Image(
                                         // width: 270,
@@ -294,7 +312,6 @@ class Home extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-
 
                                   Positioned(
                                     top: 0,

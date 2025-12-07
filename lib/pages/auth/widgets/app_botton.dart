@@ -11,7 +11,7 @@ class AppBotton extends StatelessWidget {
         height: 55,
         width: 340,
         decoration: BoxDecoration(
-          color: Color(0xff452CE8),
+          color: Color(0xff71D3D5),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
