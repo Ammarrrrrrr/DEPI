@@ -33,10 +33,10 @@ class _CartState extends State<Cart> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text("My Cart", style: Fonts().heading4(color: Coloring().n950)),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: Coloring().n950),
-        ),
+        //leading: IconButton(
+        //  onPressed: () => Navigator.pop(context),
+        //  icon: Icon(Icons.arrow_back_ios_new_outlined, color: Coloring().n950),
+       // ),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
