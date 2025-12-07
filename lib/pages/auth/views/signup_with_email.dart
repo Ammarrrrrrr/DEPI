@@ -67,53 +67,53 @@ class _SignupWithEmailState extends State<SignupWithEmail> {
                   isPass: true,
                 ),
                 SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        child: activeRec
-                            ? SvgPicture.asset("assets/icons/active_rec.svg")
-                            : SvgPicture.asset("assets/icons/Rectangle.svg"),
-                        onTap: () {
-                          setState(() {
-                            activeRec = !activeRec;
-                          });
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        "Agree with ",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff323135),
-                          fontFamily: "openSansM",
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: Color(0xff452CE8),
-                              width: 2,
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          "Terms & Condition",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff452CE8),
-                            fontFamily: "openSansM",
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 50),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                //   child: Row(
+                //     children: [
+                //       GestureDetector(
+                //         child: activeRec
+                //             ? SvgPicture.asset("assets/icons/active_rec.svg")
+                //             : SvgPicture.asset("assets/icons/Rectangle.svg"),
+                //         onTap: () {
+                //           setState(() {
+                //             activeRec = !activeRec;
+                //           });
+                //         },
+                //       ),
+                //       SizedBox(width: 8),
+                //       Text(
+                //         "Agree with ",
+                //         style: TextStyle(
+                //           fontSize: 17,
+                //           fontWeight: FontWeight.w500,
+                //           color: Color(0xff323135),
+                //           fontFamily: "openSansM",
+                //         ),
+                //       ),
+                //       Container(
+                //         decoration: BoxDecoration(
+                //           border: Border(
+                //             bottom: BorderSide(
+                //               color: Color(0xff452CE8),
+                //               width: 2,
+                //             ),
+                //           ),
+                //         ),
+                //         child: Text(
+                //           "Terms & Condition",
+                //           style: TextStyle(
+                //             fontSize: 17,
+                //             fontWeight: FontWeight.w500,
+                //             color: Color(0xff452CE8),
+                //             fontFamily: "openSansM",
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                SizedBox(height: 30),
                 AppBotton(
                   text: "Signup",
                   GoToPage: () async {
