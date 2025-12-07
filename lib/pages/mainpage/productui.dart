@@ -96,7 +96,7 @@ class Productui extends StatelessWidget {
                   height: 260,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Coloring().p50,
+                    color: Coloring().p0,
                   ),
                   child: Image(
                     width: 375,

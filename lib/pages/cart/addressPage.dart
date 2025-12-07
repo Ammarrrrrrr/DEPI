@@ -24,52 +24,55 @@ class Addresspage extends StatelessWidget {
     final cartItems = Provider.of<CartProvider>(context).products;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFD6EEF0),
         centerTitle: true,
         title: Text("Address", style: Fonts().heading4(color: Coloring().n950)),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 50),
-
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                //SizedBox(width: 10,),
-                Text(
-                  "Please Enter your Delivery Address",
-                  style: Fonts().bodyXLargeMedium(color: Colors.black),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+        
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  //SizedBox(width: 10,),
+                  Text(
+                    "Please Enter your Delivery Address",
+                    style: Fonts().bodyXLargeMedium(color: Colors.black),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _StreetController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Street',
                 ),
-              ],
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _StreetController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Street',
+                maxLines: 1,
               ),
-              maxLines: 1,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _BuildingController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Building',
+              SizedBox(height: 10),
+              TextField(
+                controller: _BuildingController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Building',
+                ),
+                maxLines: 1,
               ),
-              maxLines: 1,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _AppartmentController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Apartment',
+              SizedBox(height: 10),
+              TextField(
+                controller: _AppartmentController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Apartment',
+                ),
+                maxLines: 1,
               ),
-              maxLines: 1,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: CartSummary(
