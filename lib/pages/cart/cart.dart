@@ -27,9 +27,9 @@ class _CartState extends State<Cart> {
 
     log("cart length: " + cartItems.length.toString());
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFD6EEF0),
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text("My Cart", style: Fonts().heading4(color: Coloring().n950)),

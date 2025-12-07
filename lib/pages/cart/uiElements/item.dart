@@ -34,7 +34,7 @@ class CartItemTile extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Coloring().p0,
         border: Border(bottom: BorderSide(color: Coloring().n100)),
       ),
       padding: EdgeInsets.all(12),
